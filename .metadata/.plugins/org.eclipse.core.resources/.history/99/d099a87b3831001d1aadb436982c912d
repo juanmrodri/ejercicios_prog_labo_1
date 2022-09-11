@@ -1,0 +1,26 @@
+/*
+ * transformarTemperatura.c
+ *
+ *  Created on: 10 sept 2022
+ *      Author: juanm
+ */
+
+#include "transformarTemperatura.h"
+
+float transformarCelsiusAfaren(int tempCel)
+{
+	float tempFaren;
+
+	tempFaren = (float)(tempCel * 9/5)+32;
+
+	return tempFaren;
+}
+
+float transformarFarenAcelsius(int tempFaren)
+{
+	float tempCel;
+
+	tempCel = (float)(tempFaren - 32)*5/9;
+
+	return tempCel;
+}

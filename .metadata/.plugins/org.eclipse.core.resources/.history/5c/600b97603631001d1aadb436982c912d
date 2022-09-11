@@ -1,0 +1,18 @@
+/*
+ * transformarTemperatura.c
+ *
+ *  Created on: 10 sept 2022
+ *      Author: juanm
+ */
+
+#include "transformarTemperatura.h"
+
+int transformarCelsiusAfaren(int tempCel)
+{
+
+}
+
+int transformarFarenAcelsius(int tempCel)
+{
+
+}

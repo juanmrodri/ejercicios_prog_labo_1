@@ -1,0 +1,55 @@
+12:41:27 **** Rebuild of configuration Debug for project gui-test ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\gui-test.o" "..\\src\\gui-test.c" 
+..\src\gui-test.c:6:14: error: unknown type name 'GtkWidget'
+    6 | print_hello (GtkWidget *widget,
+      |              ^~~~~~~~~
+..\src\gui-test.c:7:14: error: unknown type name 'gpointer'
+    7 |              gpointer   data)
+      |              ^~~~~~~~
+..\src\gui-test.c:13:11: error: unknown type name 'GtkApplication'
+   13 | activate (GtkApplication *app,
+      |           ^~~~~~~~~~~~~~
+..\src\gui-test.c:14:11: error: unknown type name 'gpointer'
+   14 |           gpointer        user_data)
+      |           ^~~~~~~~
+..\src\gui-test.c: In function 'main':
+..\src\gui-test.c:32:3: error: unknown type name 'GtkApplication'
+   32 |   GtkApplication *app;
+      |   ^~~~~~~~~~~~~~
+..\src\gui-test.c:35:9: warning: implicit declaration of function 'gtk_application_new' [-Wimplicit-function-declaration]
+   35 |   app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+      |         ^~~~~~~~~~~~~~~~~~~
+..\src\gui-test.c:35:49: error: 'G_APPLICATION_FLAGS_NONE' undeclared (first use in this function)
+   35 |   app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+..\src\gui-test.c:35:49: note: each undeclared identifier is reported only once for each function it appears in
+..\src\gui-test.c:36:3: warning: implicit declaration of function 'g_signal_connect' [-Wimplicit-function-declaration]
+   36 |   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+      |   ^~~~~~~~~~~~~~~~
+..\src\gui-test.c:36:38: warning: implicit declaration of function 'G_CALLBACK' [-Wimplicit-function-declaration]
+   36 |   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+      |                                      ^~~~~~~~~~
+..\src\gui-test.c:36:50: error: 'activate' undeclared (first use in this function)
+   36 |   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+      |                                                  ^~~~~~~~
+..\src\gui-test.c:37:12: warning: implicit declaration of function 'g_application_run' [-Wimplicit-function-declaration]
+   37 |   status = g_application_run (G_APPLICATION (app), argc, argv);
+      |            ^~~~~~~~~~~~~~~~~
+..\src\gui-test.c:37:31: warning: implicit declaration of function 'G_APPLICATION' [-Wimplicit-function-declaration]
+   37 |   status = g_application_run (G_APPLICATION (app), argc, argv);
+      |                               ^~~~~~~~~~~~~
+..\src\gui-test.c:37:52: error: 'argc' undeclared (first use in this function); did you mean '_argc'?
+   37 |   status = g_application_run (G_APPLICATION (app), argc, argv);
+      |                                                    ^~~~
+      |                                                    _argc
+..\src\gui-test.c:37:58: error: 'argv' undeclared (first use in this function); did you mean '_argv'?
+   37 |   status = g_application_run (G_APPLICATION (app), argc, argv);
+      |                                                          ^~~~
+      |                                                          _argv
+..\src\gui-test.c:38:3: warning: implicit declaration of function 'g_object_unref' [-Wimplicit-function-declaration]
+   38 |   g_object_unref (app);
+      |   ^~~~~~~~~~~~~~
+
+12:41:27 Build Failed. 9 errors, 6 warnings. (took 142ms)
+

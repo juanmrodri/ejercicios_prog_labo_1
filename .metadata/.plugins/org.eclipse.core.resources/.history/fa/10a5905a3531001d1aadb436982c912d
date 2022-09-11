@@ -1,0 +1,92 @@
+/*
+ ============================================================================
+ Name        : ejercicio-4-2.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+
+ Ejercicio 4-2:
+
+Realizar un programa que permita la carga de temperaturas en celsius y fahrenheit ,
+validando que las temperaturas ingresadas estén entre el punto de congelación y
+ebullición del agua para cada tipo de escala.
+
+Las validaciones se hacen en una biblioteca.
+
+Las funciones de transformación de fahrenheit a celsius y de celsius a fahrenheit se hacen en otra biblioteca.
+
+celsius
+
+cong: -2
+ebull: 100
+
+fahrenheit
+
+cong: 32
+ebull: 212
+
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "validarTemperaturas.h"
+
+int main(void) {
+	setbuf(stdout, NULL);
+
+	int tempCelsiusIngresada;
+	int tempFahrenheit;
+	int response;
+
+	response=0;
+	tempCelsiusIngresada=0;
+	tempFahrenheit=0;
+
+ while(response!=5)
+ {
+	 printf("Que desea realizar?\n\n"
+			 "1) Ingresar Celsius: (%d)\n"
+			 "2) Ingresar Fahrenheit: (%d)\n"
+			 "3) Transformar Celsius a Fahrenheit: (%d)\n"
+			 "4) Transformar Fahrenheit a Celsius: (%d)\n"
+			 "5) Salir\n---> ",tempCelsiusIngresada, tempFahrenheit, tempCelsiusIngresada, tempFahrenheit);
+	 scanf("%d",&response);
+
+	 switch(response)
+	 {
+	 case 1:
+		 while(pedirCelsius(&tempCelsiusIngresada)!=1)
+		{
+			printf("Por favor ingresar una temperatura valida! \n");
+		}
+		printf("temperatura ingresada (c): %d\n", tempCelsiusIngresada);
+		 break;
+	 case 2:
+		 while(pedirFahrenheit(&tempFahrenheit)!=1)
+		{
+			printf("Por favor ingresar una temperatura valida! \n");
+		}
+		 printf("temperatura ingresada (f): %d\n", tempFahrenheit);
+		 break;
+	 }
+	 case 3:
+		 if(tempCelsiusIngresada==0)
+		 {
+			 printf("Por favor ingrese la temperatura antes de realizar la transformacion!");
+		 }
+		 else
+		 {
+			 if(tempCelsiusIngresada!=0)
+			 {
+
+			 }
+		 }
+		 break;
+
+ }
+
+
+	return EXIT_SUCCESS;
+}

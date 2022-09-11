@@ -1,0 +1,18 @@
+/*
+ * transformarTemperatura.h
+ *
+ *  Created on: 10 sept 2022
+ *      Author: juanm
+ */
+
+#ifndef TRANSFORMARTEMPERATURA_H_
+#define TRANSFORMARTEMPERATURA_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int transformarCelsiusAfaren(int tempCel, int tempFaren);
+
+int transformarFarenAcelsius(int tempCel, int tempFaren);
+
+#endif /* TRANSFORMARTEMPERATURA_H_ */
