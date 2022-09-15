@@ -1,1 +1,5 @@
-Info: Nothing to build for ejercicio-5-1
+19:45:09 **** Rebuild of configuration Debug for project clase-14-09-22-recursividad ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\clase-14-09-22-recursividad.o" "..\\src\\clase-14-09-22-recursividad.c" 
+gcc -o clase-14-09-22-recursividad.exe "src\\clase-14-09-22-recursividad.o" 
+Info: Nothing to build for clase-14-09-22-recursividad
