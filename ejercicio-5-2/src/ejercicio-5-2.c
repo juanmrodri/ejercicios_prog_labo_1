@@ -135,6 +135,13 @@ int main(void) {
 				{
 					printf("Pos: %d\n",listaPosImpares[i]);
 				}
+				else
+				{
+					if(listaPosImpares[0]==0)
+					{
+						printf("Pos: %d\n",listaPosImpares[i]);
+					}
+				}
 		}
 
 	return EXIT_SUCCESS;
