@@ -21,4 +21,8 @@ int checkOddNumber(int number);
 
 void checkMaxOddNumber(int* flag, int* min, int* max, int number);
 
+void initArray(int pArray[], int len);
+
+int findEmptyPosArray(int pArray[], int len, int* ind);
+
 #endif /* CHECKERS_H_ */

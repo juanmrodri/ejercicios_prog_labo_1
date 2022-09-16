@@ -89,3 +89,38 @@ void checkMaxOddNumber(int* flag, int* min, int* max, int number)
 				}
 	}
 }
+
+void initArray(int pArray[], int len)
+{
+
+	int i;
+
+	if(pArray!=NULL && len>0)
+	{
+		for(i=0;i<len;i++)
+		{
+			pArray[i]=0;
+		}
+	}
+}
+
+int findEmptyPosArray(int pArray[], int len, int* ind)
+{
+	int ret=1;
+	int i;
+
+	if(pArray!=NULL && len >0 && ind!=NULL)
+	{
+		for(i=0;i<len;i++)
+		{
+			if(pArray[i]==0)
+			{
+				*ind=i;
+				ret=0;
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
