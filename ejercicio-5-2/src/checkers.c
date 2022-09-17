@@ -90,7 +90,7 @@ void checkMaxOddNumber(int* flag, int* min, int* max, int number)
 	}
 }
 
-void initArray(int pArray[], int len)
+void initArray(int pArray[], int len, int number)
 {
 
 	int i;
@@ -99,7 +99,7 @@ void initArray(int pArray[], int len)
 	{
 		for(i=0;i<len;i++)
 		{
-			pArray[i]=0;
+			pArray[i]=number;
 		}
 	}
 }

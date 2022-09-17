@@ -21,7 +21,7 @@ int checkOddNumber(int number);
 
 void checkMaxOddNumber(int* flag, int* min, int* max, int number);
 
-void initArray(int pArray[], int len);
+void initArray(int pArray[], int len, int number);
 
 int findEmptyPosArray(int pArray[], int len, int* ind);
 

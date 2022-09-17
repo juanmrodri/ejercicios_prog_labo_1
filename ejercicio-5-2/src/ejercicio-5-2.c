@@ -52,11 +52,9 @@ int main(void) {
 	sumaPares=0;
 	imparFlag=1;
 
-	initArray(listaNumeros, LEN);
-
-	initArray(listaPares, LEN);
-
-	initArray(listaPosImpares, LEN);
+	initArray(listaNumeros, LEN, 0);
+	initArray(listaPares, LEN, 0);
+	initArray(listaPosImpares, LEN, -1001);
 
 	for(i=0;i<LEN;i++)
 	{
@@ -131,16 +129,9 @@ int main(void) {
 		printf("-------------------------------------\n");
 		for(i=0;i<LEN;i++)
 		{
-				if(listaPosImpares[i]!=0)
+				if(listaPosImpares[i]!=-1001)
 				{
 					printf("Pos: %d\n",listaPosImpares[i]);
-				}
-				else
-				{
-					if(listaPosImpares[0]==0)
-					{
-						printf("Pos: %d\n",listaPosImpares[i]);
-					}
 				}
 		}
 
