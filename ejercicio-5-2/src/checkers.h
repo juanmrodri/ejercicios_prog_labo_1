@@ -25,4 +25,10 @@ void initArray(int pArray[], int len, int number);
 
 int findEmptyPosArray(int pArray[], int len, int* ind);
 
+int findRepeatNumbers(int pArray[], int len, int pArrayRep[], int lenRep);
+
+int orderAsc(int pArray[], int len);
+
+int orderDes(int pArray[], int len);
+
 #endif /* CHECKERS_H_ */

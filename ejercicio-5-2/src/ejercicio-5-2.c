@@ -46,6 +46,11 @@ int main(void) {
 	int indexPares;
 	int listaPosImpares[LEN];
 	int indexImpares;
+	int listaRepetidos[LEN];
+	int indexPosNeg;
+	int listaPositivos[LEN];
+	int listaNegativos[LEN];
+
 
 	cantidadPositivos=0;
 	cantidadNegativos=0;
@@ -55,6 +60,8 @@ int main(void) {
 	initArray(listaNumeros, LEN, 0);
 	initArray(listaPares, LEN, 0);
 	initArray(listaPosImpares, LEN, -1001);
+	initArray(listaPositivos, LEN, -1001);
+	initArray(listaNegativos, LEN, -1001);
 
 	for(i=0;i<LEN;i++)
 	{
@@ -65,12 +72,20 @@ int main(void) {
 		if(checkPositiveNumber(numeroIngresado)==0)
 		{
 			cantidadPositivos++;
+			if(findEmptyPosArray(listaPositivos,LEN,&indexPosNeg)==0)
+			{
+				listaPositivos[indexPosNeg]=numeroIngresado;
+			}
 		}
 		else
 		{
 			if(checkNegativeNumber(numeroIngresado)==0)
 			{
 				cantidadNegativos++;
+				if(findEmptyPosArray(listaNegativos,LEN,&indexPosNeg)==0)
+				{
+					listaNegativos[indexPosNeg]=numeroIngresado;
+				}
 			}
 		}
 
@@ -126,14 +141,48 @@ int main(void) {
 		}
 	}
 	printf("\nListado de los numeros Impares\n");
-		printf("-------------------------------------\n");
-		for(i=0;i<LEN;i++)
+	printf("-------------------------------------\n");
+	for(i=0;i<LEN;i++)
+	{
+			if(listaPosImpares[i]!=-1001)
+			{
+				printf("Pos: %d\n",listaPosImpares[i]);
+			}
+	}
+
+	findRepeatNumbers(listaNumeros,LEN,listaRepetidos,LEN);
+
+	printf("\nListado de los numeros repetidos\n");
+	printf("-------------------------------------\n");
+	for(i=0;i<LEN;i++)
 		{
-				if(listaPosImpares[i]!=-1001)
+				if(listaRepetidos[i]!=-1001)
 				{
-					printf("Pos: %d\n",listaPosImpares[i]);
+					printf("numero: %d\n",listaRepetidos[i]);
 				}
 		}
+
+	printf("\nPositivos:\n");
+	printf("-------------------------------------\n");
+	orderAsc(listaPositivos, LEN);
+	for(i=0;i<LEN;i++)
+	{
+		if(listaPositivos[i]!=-1001)
+		{
+			printf("Pos.%d) contiene el numero: %d\n",i,listaPositivos[i]);
+		}
+
+	}
+	printf("\nNegativos:\n");
+	printf("-------------------------------------\n");
+	orderDes(listaNegativos, LEN);
+	for(i=0;i<LEN;i++)
+	{
+		if(listaNegativos[i]!=-1001)
+		{
+		printf("Pos.%d) contiene el numero: %d\n",i,listaNegativos[i]);
+		}
+	}
 
 	return EXIT_SUCCESS;
 }

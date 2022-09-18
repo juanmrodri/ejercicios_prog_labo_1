@@ -113,7 +113,7 @@ int findEmptyPosArray(int pArray[], int len, int* ind)
 	{
 		for(i=0;i<len;i++)
 		{
-			if(pArray[i]==0)
+			if(pArray[i]==0 || pArray[i]==-1001)
 			{
 				*ind=i;
 				ret=0;
@@ -122,5 +122,87 @@ int findEmptyPosArray(int pArray[], int len, int* ind)
 		}
 	}
 
+	return ret;
+}
+
+int findRepeatNumbers(int pArray[], int len, int pArrayRep[], int lenRep)
+{
+	int ret=1;
+	int i;
+	int j;
+	int auxBuffer;
+	int auxIndex;
+
+	if(pArray!=NULL && len >0)
+	{
+		for(i=0;i<len-1;i++)
+		{
+			auxBuffer=pArray[i];
+			//printf("Estoy en el primer for: %d\n", pArray[i]);
+			for(j=i+1;j<len;j++)
+			{
+				//printf("\tEstoy en el segundo for: %d\n", pArray[j]);
+				if(auxBuffer==pArray[j])
+				{
+					//printf("\tAca hay un numero igual: %d == %d\n", auxBuffer, pArray[j]);
+					findEmptyPosArray(pArrayRep, lenRep, &auxIndex);
+					//auxNumber=pArray[j];
+					pArrayRep[auxIndex]=auxBuffer;
+					ret=0;
+				}
+			}
+		}
+	}
+
+	return ret;
+}
+
+int orderAsc(int pArray[], int len)
+{
+	int ret=1;
+	int i;
+	int flagSwap;
+	int buffer;
+
+	if(pArray!=NULL && len >0)
+	{
+		do{
+		            flagSwap = 0;
+		            for(i = 0; i < len - 1; i++){
+		                if(pArray[i] > pArray[i+1]){
+		                    flagSwap = 1;
+		                    buffer = pArray[i];
+		                    pArray[i] = pArray[i+1];
+		                    pArray[i+1] = buffer;
+		                }
+		            }
+		        }while(flagSwap);
+		ret=0;
+	}
+	return ret;
+}
+
+int orderDes(int pArray[], int len)
+{
+	int ret=1;
+	int i;
+	int flagSwap;
+	int buffer;
+
+	if(pArray!=NULL && len >0)
+	{
+		do{
+		            flagSwap = 0;
+		            for(i = 0; i < len - 1; i++){
+		                if(pArray[i] < pArray[i+1]){
+		                    flagSwap = 1;
+		                    buffer = pArray[i];
+		                    pArray[i] = pArray[i+1];
+		                    pArray[i+1] = buffer;
+		                }
+		            }
+		        }while(flagSwap);
+		ret=0;
+	}
 	return ret;
 }
