@@ -69,7 +69,7 @@ int main(void) {
 	}
 
 	// pedir char
-	if(utn_getChar(&caracterIngresado, "Por favor ingrese un caracter de la a a la z ", "error al ingresar el caracter\n\n", 'a', 'z', 2)==0)
+	if(utn_getChar(&caracterIngresado, "Por favor ingrese un caracte ( a - z ) ", "error al ingresar el caracter\n\n", 'a', 'z', 2)==0)
 	{
 		printf("\nEl caracter seleccionado fue: %c\n", caracterIngresado);
 	}

@@ -1,2 +1,3 @@
-Info: Nothing to build for function_tests
-Info: Nothing to build for function_tests
+19:07:27 **** Incremental Build of configuration Debug for project function_tests ****
+Info: Internal Builder is used for build
+gcc -o function_tests.exe "src\\function_tests.o" "src\\utn_input.o" 

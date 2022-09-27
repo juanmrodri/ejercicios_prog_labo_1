@@ -296,7 +296,7 @@ int utn_getFloatNum(float* pResultado, char* mensaje, char* mensajeError, float 
 
 int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos)
 {
-	char aux[2];
+	char aux;
 	int ret=-1;
 
 		if(pResultado!=NULL && mensaje!=NULL && mensajeError!=NULL && minimo<=maximo && reintentos>=0)
@@ -304,20 +304,16 @@ int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo
 			while(reintentos>0)
 			{
 				reintentos--;
-				if(isdigit(*pResultado)!=0)
-				{
 					printf("%s",mensaje);
 					fflush(stdin);
-					fgets(aux,sizeof(aux),stdin);
-					aux[strlen(aux)-1]='\0';
-					strcpy(pResultado, aux);
-					if(isLetter(aux, sizeof(aux))==-1)
+					aux = getchar();
+					if(isdigit(aux)==0) // es decir, si no es un digito
 					{
 						printf("estoy aca!\n");
+						*pResultado=aux;
 						ret=0;
 						break;
 					}
-				}
 				else
 				{
 					printf("%s",mensaje);
