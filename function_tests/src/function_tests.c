@@ -87,11 +87,8 @@ int main(void) {
 		printf("\nNo fue posible tomar el dni, volver a intentar\n\n");
 	}
 
-
-
-
-
-
-
 	return EXIT_SUCCESS;
 }
+
+
+

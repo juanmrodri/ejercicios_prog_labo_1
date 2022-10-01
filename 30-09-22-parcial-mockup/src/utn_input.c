@@ -146,22 +146,89 @@ static int isDni(char* pResultado, int len)
 {
 	int ret=-1;
 	int i;
-	char auxCadena[len];
-	strncpy(auxCadena,pResultado,len);
-	//int dotCount=0;
+	int dotCount=0;
 
-		for(i=0; i<len;i++)
+		for(i=1; i<len;i++)
 		{
-			printf("Pos[%d]: %c\n",i ,auxCadena[i]);
+		//printf("Esta llegando aca\n");
+			if(pResultado[i]!= '\0')
+			{
+				//printf("Esta llegando aca 2\n");
+				if(pResultado[i] == '.')
+				{
+					ret = 0;
+				}
+				printf("Esta llegando aca 3\n");
+				if(pResultado[i] < '1' || pResultado[i] > '9')
+					{
+						ret = 0;
+					}
+				if(pResultado[i] == '.')
+					{
+						//printf("Hay un punto\n");
+						dotCount++;
+					}
+				if(dotCount !=2)
+				{
+					ret = -1;
+				}
+			}
+		}
+	// por ahora existen estas variantes para gente de 80/90 anios (dnis 0.000.000) y los centennials has 99 millones (dnis 00.000.000)
+	if(pResultado[1] =='.' && pResultado[5] =='.')
+	{
+		if(pResultado[9] != '\0')
+		{
+			ret = -1;
+		}
+		else
+		{
+			ret = 0;
+		}
+
+	}
+	else
+	{
+		if(pResultado[2] =='.' && pResultado[6] =='.')
+		{
+			ret = 0;
+		}
+		else
+		{
+			// no fue un dni valido
+			ret = -1;
+		}
+	}
+
+	//printf("pResultado en pos[8] %c \n", pResultado[8]);
+	//printf("pResultado en pos[9] %c \n", pResultado[9]);
+	//printf("el strlen de pResultado al final de la func. isDni %d \n", strlen(pResultado));
+	if(strlen(pResultado)==9 && pResultado[8]!='\0' && pResultado[9]=='\0')
+	{
+		printf("strlen 9 pos 8 0 \n");
+		ret=0;
+
+	}
+	else
+	{
+		if(pResultado[2]=='.' && pResultado[9]!='\0' && pResultado[10]=='\0')
+		{
 			ret=0;
 		}
+		else
+		{
+			// no cumple con el formato
+			ret=-1;
+		}
+	}
+
 
 	return ret;
 }
 
 // funciones desarrollo
 
-int utn_getIntNum(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+int utn_getInt(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
 	int aux;
 	int ret=-1;
@@ -194,7 +261,7 @@ int utn_getIntNum(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	return ret;
 }
 
-int utn_getFloatNum(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos)
+int utn_getFloat(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos)
 {
 	float aux;
 	int ret=-1;
@@ -229,7 +296,7 @@ int utn_getFloatNum(float* pResultado, char* mensaje, char* mensajeError, float 
 
 int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos)
 {
-	char aux;
+	char aux[2];
 	int ret=-1;
 
 		if(pResultado!=NULL && mensaje!=NULL && mensajeError!=NULL && minimo<=maximo && reintentos>=0)
@@ -237,17 +304,14 @@ int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo
 			while(reintentos>0)
 			{
 				reintentos--;
+				if(isdigit(*pResultado)==0)
+				{
 					printf("%s",mensaje);
-					fflush(stdin);
-					aux = getchar();
-					printf("El strlen	de aux es: %d\n", strlen(&aux));
-					if(isdigit(aux)==0) // es decir, si no es un digito
-					{
-						printf("estoy aca!\n");
-						*pResultado=aux;
-						ret=0;
-						break;
-					}
+					fgets(aux,sizeof(aux),stdin);
+					strcpy(pResultado, aux);
+					ret=0;
+					break;
+				}
 				else
 				{
 					printf("%s",mensaje);
@@ -378,18 +442,9 @@ int utn_getDni(char* pResultado, int len, char* mensaje, char* mensajeError, int
 				aux[strlen(aux)-1]='\0';
 				if(isDni(aux, len)==0 && strlen(aux)<=10)
 				{
-					for (int j=0;j<len;j++)
-					{
-						printf("aux en la pos[%d] = %c\n",j,aux[j]);
-					}
 					strcpy(pResultado, aux);
 					ret=0;
 					break;
-				}
-				else
-				{
-					printf("%s",mensaje);
-					ret=1; // salio mal
 				}
 			}
 		}
