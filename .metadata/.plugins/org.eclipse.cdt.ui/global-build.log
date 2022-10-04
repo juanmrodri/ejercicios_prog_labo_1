@@ -1,11 +1,4 @@
-20:42:23 **** Incremental Build of configuration Debug for project function_tests ****
+00:38:11 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\function_tests.o" "..\\src\\function_tests.c" 
-..\src\function_tests.c: In function 'main':
-..\src\function_tests.c:112:34: warning: format '%d' expects argument of type 'int', but argument 2 has type 'int *' [-Wformat=]
-  112 | printf("El valor de la sumas es %d", pEnt);
-      |                                 ~^   ~~~~
-      |                                  |   |
-      |                                  int int *
-      |                                 %n
-gcc -o function_tests.exe "src\\function_tests.o" "src\\utn_input.o" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sResource.o" "..\\src\\sResource.c" 
+gcc -o 30-09-22-parcial-mockup.exe "src\\30-09-22-parcial-mockup.o" "src\\sResource.o" "src\\sType.o" "src\\utn_input.o" 

@@ -451,7 +451,7 @@ int utn_getDni(char* pResultado, int len, char* mensaje, char* mensajeError, int
 		else
 		{
 			printf("%s",mensaje);
-			ret=1; // salio mal
+			ret=-1; // salio mal
 		}
 
 	return ret;
