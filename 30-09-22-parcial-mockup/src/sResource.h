@@ -13,7 +13,6 @@
 #include "string.h"
 #include "strings.h"
 #include "utn_input.h"
-#include "sType.h"
 
 typedef struct
 {
@@ -29,13 +28,17 @@ int resource_initArray(Resource pArray[], int len); // ok
 
 int resource_findEmptyArrayPosition(Resource pArray[], int len); // ok
 
-int resource_load(Resource pArrayRes[], int lenRes, Type pArrayType[], int lenType);
+int resource_findById(Resource pArray[], int len, int id); // ok
 
-int resource_add(Resource pArray[], int len, char description[], float price, int idType);
+int resource_isResourceAdded(Resource pArray[], int len); // ok
 
-int resource_findById(Resource pArray[], int len, int id); // esto me va a dar la posicion en el array del elemento a modificar
+int resource_load(Resource pArrayRes[], int lenRes, int TypeId); // ok
 
-int resource_modify(Resource pArray[], int len, int index, int option); // el option es lo que se quiere modificar
+int resource_add(Resource pArray[], int len, char description[], float price, int idType); // ok
+
+int resource_modify(Resource pArray[], int len, int pos, int option); // ok
+
+int resource_remove(Resource pArray[], int len, int id); // ok
 
 int resource_printResource(Resource pArray[]); // ok
 

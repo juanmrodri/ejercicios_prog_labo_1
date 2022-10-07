@@ -58,42 +58,61 @@ int resource_findEmptyArrayPosition(Resource pArray[], int len)
 	return index;
 }
 
-int resource_load(Resource pArrayRes[], int lenRes, Type pArrayType[], int lenType)
+int resource_findById(Resource pArray[], int len, int id)
+{
+	int ret=-1;
+
+	if(pArray!=NULL && len>0 && id>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].idResource==id)
+			{
+				ret=i;
+				break;
+			}
+		}
+	}
+	return ret;
+}
+
+int resource_isResourceAdded(Resource pArray[], int len)
+{
+	int ret=-1;
+	if(pArray!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].isEmpty==OCCUPIED)
+			{
+				// significa que hay un recurso dado de alta
+				ret=0;
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
+
+int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
 {
 	int ret=-1;
 	char auxDescripcion[21];
 	float auxPricePerHour;
-	int auxType;
-	int auxTypeId;
 	int indexFree;
 
 	if(pArrayRes!=NULL && lenRes>0)
 	{
 		indexFree = resource_findEmptyArrayPosition(pArrayRes, lenRes);
 
-		if(indexFree>-1 && pArrayRes[indexFree].isEmpty==EMPTY)
+		if(indexFree>-1 && pArrayRes[indexFree].isEmpty==EMPTY && TypeId>999)
 		{
-			printf("\n----------------------------------------------\n");
 			if(utn_getText(auxDescripcion, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 			{
 				if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
 				{
-					printf("\n----------------------------------------------\n\n");
-					// mostramos los tipos disponibles para poder elegir
-					type_printTypes(pArrayType, lenType);
-					if(utn_getInt(&auxType, "Por favor ingrese el tipo de recurso (1- Locucion 2- Animacion 3- Iluminacion 4- Dj): ", "Error al ingresar el tipo\n", 1, 4, 2)==0)
-					{
-							// con esto obtenemos el id y lo mandamos al add como llave foranea de Resource
-							auxTypeId = type_findIdByPos(pArrayType,lenType, auxType);
-
-							resource_add(pArrayRes, lenRes, auxDescripcion, auxPricePerHour, auxTypeId);
-					}
-					else
-					{
-						ret=-1;
-						printf("Se produjo un error al ingresar el tipo!\n");
-					}
-
+							resource_add(pArrayRes, lenRes, auxDescripcion, auxPricePerHour, TypeId);
 				}
 				else
 				{
@@ -140,15 +159,151 @@ int resource_add(Resource pArray[], int len, char description[], float price, in
 	return ret;
 }
 
+int resource_modify(Resource pArray[], int len, int pos, int option)
+{
+	int ret=-1;
+	int auxResponse;
+	float auxPricePerHour;
+	char auxDescripcion[21];
+
+	if(pArray!=NULL && len>0 && option>0)
+	{
+		switch(option)
+		{
+			// precio por hora
+			case 1:
+				printf("\nEsta por modificar el precio: $%.2f\n",pArray[pos].pricePerHour);
+				if(utn_getInt(&auxResponse, "\nDesea continuar? (1 si- 2 no): ", "\nPor favor elija una opcion correcta", 1, 2, 2)==0)
+				{
+					if(auxResponse==1)
+					{
+						// se modifica
+						if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el nuevo precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
+						{
+							ret=0;
+							pArray[pos].pricePerHour=auxPricePerHour;
+							break;
+						}
+						else
+						{
+							// no se modifica
+							ret=-1;
+							printf("\nError al seleccionar\n\n");
+						}
+					}
+					else
+					{
+						if(auxResponse==2)
+						{
+							// no se modifica
+							ret=-1;
+							printf("\nNo se modificara el precio!\n");
+							break;
+						}
+					}
+				}
+				// no se modifica
+				ret=-1;
+				printf("\nError al seleccionar\n\n");
+				break;
+			// descripcion
+			case 2:
+				printf("\nEsta por modificar la descripcion: %s\n",pArray[pos].description);
+				if(utn_getInt(&auxResponse, "\nDesea continuar? (1 si- 2 no): ", "\nPor favor elija una opcion correcta", 1, 2, 2)==0)
+				{
+					// se modifica
+					if(auxResponse==1)
+					{
+						if(utn_getText(auxDescripcion, 21, "\nPor favor ingrese la nueva descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
+						{
+							ret=0;
+							strncpy(pArray[pos].description,auxDescripcion,sizeof(pArray[pos].description));
+							break;
+						}
+						else
+						{
+							// no se modifica
+							ret=-1;
+							printf("\nError al ingresar descripcion\n\n");
+						}
+					}
+					else
+					{
+						if(auxResponse==2)
+						{
+							// no se modifica
+							ret=-1;
+							printf("\nNo se modificara la descripcion!\n");
+							break;
+						}
+					}
+				}
+				else
+				{
+					// no se modifica
+					ret=-1;
+					printf("\nError al seleccionar\n\n");
+				}
+				break;
+		}
+	}
+	return ret;
+}
+
+int resource_remove(Resource pArray[], int len, int id)
+{
+	int ret=-1;
+	int auxResponse;
+
+	if(pArray!=NULL && len>0 && id>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].idResource==id && pArray[i].isEmpty == OCCUPIED)
+			{
+				//es el id seleccionado
+				printf("\nEsta por dar de baja: \n\n");
+				resource_printResource(&pArray[i]);
+				if(utn_getInt(&auxResponse, "\ndesea continuar? (1 si- 2 no): ", "\nPor favor elija una opcion correcta", 1, 2, 2)==0)
+				{
+					if(auxResponse==1)
+					{
+						ret=0;
+						pArray[i].isEmpty=EMPTY;
+						break;
+					}
+					else
+					{
+						if(auxResponse==2)
+						{
+							ret=-1;
+							printf("\nNo se realizara la baja\n\n");
+							break;
+						}
+					}
+				}
+				else
+				{
+					ret=-1;
+					printf("\nError al elegir opcion\n\n");
+				}
+			}
+			ret=-1;
+			printf("\nError en el id\n\n");
+		}
+	}
+	return ret;
+}
+
 int resource_printResource(Resource pArray[])
 {
 	int ret=-1;
 	if(pArray!=NULL)
 	{
-		printf("id: %d\n"
-				"Descripcion:%s\n"
-				"Precio por hora: $%.2f\n"
-				"IdType: %d\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,pArray->typeId);
+		printf("\nid: %d\n"
+					"Descripcion:%s\n"
+					"Precio por hora: $%.2f\n"
+					"IdType: %d\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,pArray->typeId);
 	}
 	return ret;
 }

@@ -32,7 +32,10 @@ int main(void) {
 	char cadenaIngresada[124];
 	char dniIngresado[12];
 	int i;
+	char cadenaParaSizeOf[21];
 
+
+	printf("El size of de cadena: %d",sizeof(cadenaParaSizeOf));
 
 	// pedir cadena de char
 	if(utn_getText(cadenaIngresada,124,"Por favor ingrese una cadena de caracteres ", "error al ingresar la cadena de caracteres\n\n", 2)==0)
