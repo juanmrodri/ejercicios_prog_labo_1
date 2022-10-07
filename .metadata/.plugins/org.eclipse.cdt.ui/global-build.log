@@ -1,4 +1,4 @@
-14:50:14 **** Incremental Build of configuration Debug for project ejercicio-15-1 ****
+19:49:48 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ejercicio-15-1.o" "..\\src\\ejercicio-15-1.c" 
-gcc -o ejercicio-15-1.exe "src\\ejercicio-15-1.o" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sType.o" "..\\src\\sType.c" 
+gcc -o 30-09-22-parcial-mockup.exe "src\\30-09-22-parcial-mockup.o" "src\\menu.o" "src\\sResource.o" "src\\sType.o" "src\\utn_input.o" 

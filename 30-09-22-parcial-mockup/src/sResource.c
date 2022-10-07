@@ -24,8 +24,6 @@ static int newIdGenerator(void)
 	return cont++;
 }
 
-
-
 int resource_initArray(Resource pArray[], int len)
 {
 	int ret=-1;
@@ -98,7 +96,7 @@ int resource_isResourceAdded(Resource pArray[], int len)
 int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
 {
 	int ret=-1;
-	char auxDescripcion[21];
+	char auxDescription[21];
 	float auxPricePerHour;
 	int indexFree;
 
@@ -108,11 +106,11 @@ int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
 
 		if(indexFree>-1 && pArrayRes[indexFree].isEmpty==EMPTY && TypeId>999)
 		{
-			if(utn_getText(auxDescripcion, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
+			if(utn_getText(auxDescription, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 			{
 				if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
 				{
-							resource_add(pArrayRes, lenRes, auxDescripcion, auxPricePerHour, TypeId);
+							resource_add(pArrayRes, lenRes, auxDescription, auxPricePerHour, TypeId);
 				}
 				else
 				{
@@ -164,7 +162,7 @@ int resource_modify(Resource pArray[], int len, int pos, int option)
 	int ret=-1;
 	int auxResponse;
 	float auxPricePerHour;
-	char auxDescripcion[21];
+	char auxDescription[21];
 
 	if(pArray!=NULL && len>0 && option>0)
 	{
@@ -197,7 +195,7 @@ int resource_modify(Resource pArray[], int len, int pos, int option)
 						{
 							// no se modifica
 							ret=-1;
-							printf("\nNo se modificara el precio!\n");
+							printf("\nNo se modificara el precio!\n\n");
 							break;
 						}
 					}
@@ -214,10 +212,10 @@ int resource_modify(Resource pArray[], int len, int pos, int option)
 					// se modifica
 					if(auxResponse==1)
 					{
-						if(utn_getText(auxDescripcion, 21, "\nPor favor ingrese la nueva descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
+						if(utn_getText(auxDescription, 21, "\nPor favor ingrese la nueva descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 						{
 							ret=0;
-							strncpy(pArray[pos].description,auxDescripcion,sizeof(pArray[pos].description));
+							strncpy(pArray[pos].description,auxDescription,sizeof(pArray[pos].description));
 							break;
 						}
 						else
@@ -233,7 +231,7 @@ int resource_modify(Resource pArray[], int len, int pos, int option)
 						{
 							// no se modifica
 							ret=-1;
-							printf("\nNo se modificara la descripcion!\n");
+							printf("\nNo se modificara la descripcion!\n\n");
 							break;
 						}
 					}

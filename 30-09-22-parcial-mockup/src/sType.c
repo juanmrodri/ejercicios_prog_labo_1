@@ -70,6 +70,25 @@ int type_findIdByPos(Type pArray[], int len, int pos)
 	return id;
 }
 
+int type_findPosById(Type pArray[], int len, int id)
+{
+	int auxPos;
+
+	if(pArray!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].idType == id)
+			{
+				auxPos = i;
+				break;
+			}
+		}
+	}
+
+	return auxPos;
+}
+
 void type_forceLoad(Type pArray[], int len, char description[])
 {
 	int indexFree;
@@ -78,6 +97,22 @@ void type_forceLoad(Type pArray[], int len, char description[])
 	pArray[indexFree].idType=newIdGenerator();
 	strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description)); // con el sizeof tomamos el tamanio del lugar a donde lo guardamos
 	pArray[indexFree].isEmpty=OCCUPIED;
+}
+
+void type_getDescriptionById(Type pArray[], int len, int id, char description[])
+{
+	int auxPos;
+	int auxSize;
+
+	if(pArray!=NULL && len>0 && id >999)
+	{
+		auxPos = type_findPosById(pArray, len, id); // buscamos la posicion por el id
+
+		auxSize = sizeof(pArray[auxPos].description);
+
+		strncpy(description,pArray[auxPos].description,auxSize);
+	}
+
 }
 
 int type_printType(Type pArray[])

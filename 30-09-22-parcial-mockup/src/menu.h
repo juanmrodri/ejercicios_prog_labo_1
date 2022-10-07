@@ -10,13 +10,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "utn_input.h"
 #include "sResource.h"
 #include "sType.h"
 
-int menu(int*  response);
+int menu_show(int*  response);
 
-int menu_resolve(int response, Resource pArray[], int lenResource, )
-
+int menu_resolve(int response, Resource arrayResources[], int lenResource, Type arrayTypes[], int lenType);
 
 
 
