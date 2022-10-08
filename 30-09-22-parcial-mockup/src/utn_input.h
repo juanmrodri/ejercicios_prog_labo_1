@@ -50,7 +50,7 @@ int utn_getFloat(float* pResultado, char* mensaje, char* mensajeError, float min
 int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);
 
 /**
-* \brief Solicita una cadena de caracteres al usuario y si pasa las validaciones, se guardara en el puntero pResultado
+* \brief Solicita una cadena de caracteres al usuario (solo letras) y si pasa las validaciones, se guardara en el puntero pResultado
 * \param pResultado Se carga la cadena validada
 * \param mensaje Mensaje que solicita que se debe hacer
 * \param mensajeError Es el mensaje a ser mostrado en caso de error
@@ -60,6 +60,18 @@ int utn_getChar(char* pResultado, char* mensaje, char* mensajeError, char minimo
 * \return ret = [0] - error = [1]
 */
 int utn_getText(char* pResultado, int len, char* mensaje, char* mensajeError, int reintentos);
+
+/**
+* \brief Solicita una cadena de caracteres al usuario (con signos de puntuacion) y si pasa las validaciones, se guardara en el puntero pResultado
+* \param pResultado Se carga la cadena validada
+* \param mensaje Mensaje que solicita que se debe hacer
+* \param mensajeError Es el mensaje a ser mostrado en caso de error
+* \param minimo Limite inferior a validar
+* \param maximo Limite superior a validar
+* \param reintentos cantidad de intentos en caso de error
+* \return ret = [0] - error = [1]
+*/
+int utn_getTextWithPuntiationMarks(char* pResultado, int len, char* mensaje, char* mensajeError, int reintentos);
 
 /**
 * \brief Solicita una cadena de caracteres, pero, con la condicion indicada en mensaje al usuario y si pasa las validaciones, se guardara en el puntero pResultado

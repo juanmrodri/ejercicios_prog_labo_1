@@ -53,7 +53,7 @@
 #include "sType.h"
 #include "menu.h"
 
-#define RES_LEN 4
+#define RES_LEN 10
 #define TYPE_LEN 4
 
 int main(void) {
@@ -74,7 +74,13 @@ int main(void) {
 	type_forceLoad(arrayTypes, TYPE_LEN, "ILUMINACION");
 	type_forceLoad(arrayTypes, TYPE_LEN, "DJ");
 
-
+	// los type id = 1000 - LOCUCION; 1001 - ANIMACION; 1002 - ILUMINACION; 1003 - DJ
+	resource_forceLoad(arrayResources, RES_LEN, "Actor, mago", 12500, 1003);
+	resource_forceLoad(arrayResources, RES_LEN, "Luces, leds,camaras", 1200, 1002);
+	resource_forceLoad(arrayResources, RES_LEN, "Leds", 20000, 1002);
+	resource_forceLoad(arrayResources, RES_LEN, "Hernan Cattaneo", 350000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Principi", 20000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Daft Punk", 350000, 1000);
 
 	//menu
 

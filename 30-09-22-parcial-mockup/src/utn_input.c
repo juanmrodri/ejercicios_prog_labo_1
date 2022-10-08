@@ -26,6 +26,10 @@ static int isFloat(char* pResultado);
 
 static int myGets(char* cadena, int longitud);
 
+static int isLetter(char* pResultado, int len);
+
+static int isLetterWithPuntiationMarks(char* pResultado, int len);
+
 // stactic func. desarrollo
 
 /**
@@ -134,6 +138,21 @@ static int isLetter(char* pResultado, int len)
 	while(pResultado[i]!='\0')
 	{
 		if((pResultado[i] < 'A' || pResultado[i] > 'Z') && (pResultado[i] < 'a' || pResultado[i] > 'z') && (pResultado[i]!=' '))
+			{
+				ret = 0;
+			}
+		i++;
+	}
+	return ret;
+}
+
+static int isLetterWithPuntiationMarks(char* pResultado, int len)
+{
+	int ret=-1;
+	int i=0;
+	while(pResultado[i]!='\0')
+	{
+		if((pResultado[i] < 'A' || pResultado[i] > 'Z') && (pResultado[i] < 'a' || pResultado[i] > 'z') && (pResultado[i]!=' ') && pResultado[i]!=',' && pResultado[i]!=';' && pResultado[i]!='-')
 			{
 				ret = 0;
 			}
@@ -338,6 +357,37 @@ int utn_getText(char* pResultado, int len, char* mensaje, char* mensajeError, in
 				fgets(aux,sizeof(aux),stdin);
 				aux[strlen(aux)-1]='\0';
 				if(isLetter(aux, len)==-1 && strlen(aux)<len) // que solo sean letras y no numeros
+				{
+					ret=0;
+					strcpy(pResultado, aux);
+					break;
+				}
+				else
+				{
+					ret=-1; // salio mal
+					printf("%s",mensajeError);
+				}
+			}
+		}
+
+	return ret;
+}
+
+int utn_getTextWithPuntiationMarks(char* pResultado, int len, char* mensaje, char* mensajeError, int reintentos)
+{
+	char aux[1024];
+	int ret=-1;
+
+		if(pResultado!=NULL && len>0 && mensaje!=NULL && mensajeError!=NULL && reintentos>=0)
+		{
+			while(reintentos>0)
+			{
+				reintentos--;
+				printf("%s",mensaje);
+				fflush(stdin);
+				fgets(aux,sizeof(aux),stdin);
+				aux[strlen(aux)-1]='\0';
+				if(isLetterWithPuntiationMarks(aux, len)==-1 && strlen(aux)<len) // que solo sean letras y no numeros
 				{
 					ret=0;
 					strcpy(pResultado, aux);

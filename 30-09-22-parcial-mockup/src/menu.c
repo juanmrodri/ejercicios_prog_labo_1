@@ -7,7 +7,7 @@
 
 #include "menu.h"
 
-#define RES_LEN 4
+#define RES_LEN 10
 #define TYPE_LEN 4
 
 // static functions
@@ -175,6 +175,8 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 						{
 							printf("\n\tLista de recursos de recursos\n");
 							printf("\n----------------------------------------------\n");
+							// primero ordenamos el tipo, despues mostramos
+							resource_arrayAscendingOrder(arrayResources, RES_LEN);
 							resource_printResources(arrayResources, RES_LEN);
 						}
 						else

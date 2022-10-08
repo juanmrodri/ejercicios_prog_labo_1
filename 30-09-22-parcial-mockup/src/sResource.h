@@ -26,6 +26,8 @@ typedef struct
 
 int resource_initArray(Resource pArray[], int len); // ok
 
+void resource_forceLoad(Resource pArray[], int len, char description[], float pricePerHour, int typeId);
+
 int resource_findEmptyArrayPosition(Resource pArray[], int len); // ok
 
 int resource_findById(Resource pArray[], int len, int id); // ok
@@ -43,6 +45,8 @@ int resource_remove(Resource pArray[], int len, int id); // ok
 int resource_printResource(Resource pArray[]); // ok
 
 int resource_printResources(Resource pArray[], int len); // ok
+
+void resource_arrayAscendingOrder(Resource pArray[], int len); // ok
 
 
 #endif /* SRESOURCE_H_ */

@@ -39,6 +39,18 @@ int resource_initArray(Resource pArray[], int len)
 	return ret;
 }
 
+void resource_forceLoad(Resource pArray[], int len, char description[], float pricePerHour, int typeId)
+{
+	int indexFree;
+
+	indexFree = resource_findEmptyArrayPosition(pArray, len);
+	pArray[indexFree].idResource = newIdGenerator();
+	strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
+	pArray[indexFree].pricePerHour = pricePerHour;
+	pArray[indexFree].typeId = typeId;
+	pArray[indexFree].isEmpty=OCCUPIED;
+}
+
 int resource_findEmptyArrayPosition(Resource pArray[], int len)
 {
 	int index=-1;
@@ -106,7 +118,7 @@ int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
 
 		if(indexFree>-1 && pArrayRes[indexFree].isEmpty==EMPTY && TypeId>999)
 		{
-			if(utn_getText(auxDescription, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
+			if(utn_getTextWithPuntiationMarks(auxDescription, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 			{
 				if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
 				{
@@ -212,7 +224,7 @@ int resource_modify(Resource pArray[], int len, int pos, int option)
 					// se modifica
 					if(auxResponse==1)
 					{
-						if(utn_getText(auxDescription, 21, "\nPor favor ingrese la nueva descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
+						if(utn_getTextWithPuntiationMarks(auxDescription, 21, "\nPor favor ingrese la nueva descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 						{
 							ret=0;
 							strncpy(pArray[pos].description,auxDescription,sizeof(pArray[pos].description));
@@ -296,12 +308,41 @@ int resource_remove(Resource pArray[], int len, int id)
 int resource_printResource(Resource pArray[])
 {
 	int ret=-1;
+	char auxDescription[31];
+
+	if(pArray->typeId == 1000)
+	{
+		strncpy(auxDescription,"Locucion",31);
+	}
+	else
+	{
+		if(pArray->typeId == 1001)
+		{
+			strncpy(auxDescription,"Animacion",31);
+		}
+		else
+		{
+			if(pArray->typeId == 1002)
+			{
+				strncpy(auxDescription,"Iluminacion",31);
+			}
+			else
+			{
+				if(pArray->typeId == 1003)
+				{
+					strncpy(auxDescription,"Dj",31);
+				}
+			}
+		}
+	}
+
 	if(pArray!=NULL)
 	{
+		printf("typeID: %d\n------------\n", pArray->typeId);
 		printf("\nid: %d\n"
 					"Descripcion:%s\n"
 					"Precio por hora: $%.2f\n"
-					"IdType: %d\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,pArray->typeId);
+					"Tipo: %s\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,auxDescription);
 	}
 	return ret;
 }
@@ -320,6 +361,32 @@ int resource_printResources(Resource pArray[], int len)
 		}
 	}
 	return ret;
+}
+
+void resource_arrayAscendingOrder(Resource pArray[], int len)
+{
+
+	int flagSwap;
+	int i;
+	int bufferPos;
+	int newLen;
+
+			newLen=len-1;
+	        do{
+	            flagSwap = 0;
+	            for(i = 0; i < newLen; i++)
+	            {
+	                if(pArray[i].typeId > pArray[i+1].typeId)
+	                {
+	                    flagSwap = 1;
+	                    bufferPos =pArray[i].typeId;
+	                    pArray[i].typeId =pArray[i+1].typeId;
+	                    pArray[i+1].typeId = bufferPos;
+	                }
+	            }
+	            len--;
+	        }while(flagSwap);
+
 }
 
 
