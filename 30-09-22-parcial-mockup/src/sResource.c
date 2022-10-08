@@ -47,6 +47,7 @@ void resource_forceLoad(Resource pArray[], int len, char description[], float pr
 	pArray[indexFree].idResource = newIdGenerator();
 	strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
 	pArray[indexFree].pricePerHour = pricePerHour;
+	printf("TypeId forzado: %d\n", typeId);
 	pArray[indexFree].typeId = typeId;
 	pArray[indexFree].isEmpty=OCCUPIED;
 }
