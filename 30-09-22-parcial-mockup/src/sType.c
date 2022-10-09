@@ -124,7 +124,7 @@ int type_printType(Type pArray[])
 	int ret=-1;
 		if(pArray!=NULL)
 		{
-			printf("id: %d\n"
+			printf("\nid: %d\n------------\n"
 						"Descripcion: %s\n\n", pArray->idType, pArray->description);
 		}
 	return ret;

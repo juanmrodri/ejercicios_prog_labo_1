@@ -51,6 +51,7 @@
 #include "utn_input.h"
 #include "sResource.h"
 #include "sType.h"
+#include "sEvent.h"
 #include "menu.h"
 
 #define RES_LEN 10
@@ -69,21 +70,22 @@ int main(void) {
 
 	type_initArray(arrayTypes, TYPE_LEN);
 
-	type_forceLoad(arrayTypes, TYPE_LEN, "LOCUCION");
 	type_forceLoad(arrayTypes, TYPE_LEN, "ANIMACION");
-	type_forceLoad(arrayTypes, TYPE_LEN, "ILUMINACION");
 	type_forceLoad(arrayTypes, TYPE_LEN, "DJ");
+	type_forceLoad(arrayTypes, TYPE_LEN, "ILUMINACION");
+	type_forceLoad(arrayTypes, TYPE_LEN, "LOCUCION");
 
 	// los type id = 1000 - LOCUCION; 1001 - ANIMACION; 1002 - ILUMINACION; 1003 - DJ
 	resource_forceLoad(arrayResources, RES_LEN, "Actor, mago", 12500, 1003);
 	resource_forceLoad(arrayResources, RES_LEN, "Luces, leds,camaras", 1200, 1002);
 	resource_forceLoad(arrayResources, RES_LEN, "Leds", 20000, 1002);
-	// estos estan bien
 	resource_forceLoad(arrayResources, RES_LEN, "Hernan Cattaneo", 350000, 1000);
 	resource_forceLoad(arrayResources, RES_LEN, "Principi", 20000, 1000);
-	// este se ve mal
+	resource_forceLoad(arrayResources, RES_LEN, "Pablo y Pachu", 350000, 1002);
+	resource_forceLoad(arrayResources, RES_LEN, "Pichu", 200000, 1002);
+	resource_forceLoad(arrayResources, RES_LEN, "Brzp", 350000, 1003);
+	resource_forceLoad(arrayResources, RES_LEN, "Jamie Hewlett", 350000, 1001);
 	resource_forceLoad(arrayResources, RES_LEN, "Daft Punk", 350000, 1000);
-
 	//menu
 
 	do

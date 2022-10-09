@@ -47,7 +47,6 @@ void resource_forceLoad(Resource pArray[], int len, char description[], float pr
 	pArray[indexFree].idResource = newIdGenerator();
 	strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
 	pArray[indexFree].pricePerHour = pricePerHour;
-	printf("TypeId forzado: %d\n", typeId);
 	pArray[indexFree].typeId = typeId;
 	pArray[indexFree].isEmpty=OCCUPIED;
 }
@@ -313,13 +312,13 @@ int resource_printResource(Resource pArray[])
 
 	if(pArray->typeId == 1000)
 	{
-		strncpy(auxDescription,"Locucion",31);
+		strncpy(auxDescription,"Animacion",31);
 	}
 	else
 	{
 		if(pArray->typeId == 1001)
 		{
-			strncpy(auxDescription,"Animacion",31);
+			strncpy(auxDescription,"Dj",31);
 		}
 		else
 		{
@@ -331,7 +330,7 @@ int resource_printResource(Resource pArray[])
 			{
 				if(pArray->typeId == 1003)
 				{
-					strncpy(auxDescription,"Dj",31);
+					strncpy(auxDescription,"Locucion",31);
 				}
 			}
 		}
@@ -339,8 +338,7 @@ int resource_printResource(Resource pArray[])
 
 	if(pArray!=NULL)
 	{
-		printf("typeID: %d\n------------\n", pArray->typeId);
-		printf("\nid: %d\n"
+		printf("\nid: %d\n-------\n"
 					"Descripcion:%s\n"
 					"Precio por hora: $%.2f\n"
 					"Tipo: %s\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,auxDescription);
@@ -364,30 +362,56 @@ int resource_printResources(Resource pArray[], int len)
 	return ret;
 }
 
-void resource_arrayAscendingOrder(Resource pArray[], int len)
+void resource_arrayAscendingOrderById(Resource pArray[], int len)
 {
 
 	int flagSwap;
 	int i;
-	int bufferPos;
+	Resource bufferPos;
 	int newLen;
 
-			newLen=len-1;
-	        do{
-	            flagSwap = 0;
-	            for(i = 0; i < newLen; i++)
-	            {
-	                if(pArray[i].typeId > pArray[i+1].typeId)
-	                {
-	                    flagSwap = 1;
-	                    bufferPos =pArray[i].typeId;
-	                    pArray[i].typeId =pArray[i+1].typeId;
-	                    pArray[i+1].typeId = bufferPos;
-	                }
-	            }
-	            len--;
-	        }while(flagSwap);
+	newLen=len-1;
+	do{
+		flagSwap = 0;
+		for(i = 0; i < newLen; i++)
+		{
+			if(pArray[i].typeId > pArray[i+1].typeId)
+			{
+				flagSwap = 1;
+				bufferPos =pArray[i];
+				pArray[i] =pArray[i+1];
+				pArray[i+1] = bufferPos;
+			}
+		}
+		resource_arrayAscendingOrderByDescription(pArray, len);
+		len--;
+	}while(flagSwap);
 
+}
+
+void resource_arrayAscendingOrderByDescription(Resource pArray[], int len)
+{
+	int flagSwap;
+	int i;
+	Resource bufferPos;
+	int newLen;
+
+	newLen=len-1;
+	do{
+		flagSwap = 0;
+		for(i = 0; i < newLen; i++)
+		{
+			if(strcmp(pArray[i].description,pArray[i+1].description)>0)
+			{
+				flagSwap = 1;
+				bufferPos =pArray[i];
+				pArray[i] =pArray[i+1];
+				pArray[i+1] = bufferPos;
+			}
+		}
+		len--;
+
+	}while(flagSwap);
 }
 
 

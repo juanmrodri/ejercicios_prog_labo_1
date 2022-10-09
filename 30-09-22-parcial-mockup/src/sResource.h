@@ -46,7 +46,9 @@ int resource_printResource(Resource pArray[]); // ok
 
 int resource_printResources(Resource pArray[], int len); // ok
 
-void resource_arrayAscendingOrder(Resource pArray[], int len); // ok
+void resource_arrayAscendingOrderById(Resource pArray[], int len); // ok
+
+void resource_arrayAscendingOrderByDescription(Resource pArray[], int len); //ok
 
 
 #endif /* SRESOURCE_H_ */

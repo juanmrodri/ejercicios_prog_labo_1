@@ -31,7 +31,11 @@ int menu_show(int*  response)
 	if(utn_getInt(&bufferResponse, "1- ALTA DE RECURSO\n"
 															"2- MODIFICAR RECURSO\n"
 															"3- BAJA RECURSO\n"
-															"4- LISTAR RECURSOS\n -> ", "Error al ingresar opcion!\n\n",1,8, 2)==0)
+															"4- LISTAR RECURSOS\n"
+															"5- LISTAR TIPOS\n"
+															"6- ALTA EVENTO\n"
+															"7- LISTAR EVENTOS\n"
+															"8- INFORMES\n -> ", "Error al ingresar opcion!\n\n",1,8, 2)==0)
 	{
 		if(bufferResponse>0 && bufferResponse<9)
 		{
@@ -83,7 +87,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 
 							// mostramos los tipos disponibles para poder elegir
 							type_printTypes(arrayTypes, TYPE_LEN);
-							if(utn_getInt(&auxTypeId, "Por favor ingrese el tipo de recurso (1- Locucion 2- Animacion 3- Iluminacion 4- Dj): ", "Error al ingresar el tipo\n", 1, 4, 2)==0)
+							if(utn_getInt(&auxTypeId, "Por favor ingrese el tipo de recurso (1- Animacion 2- Dj 3- Iluminacion 4- Locucion): ", "Error al ingresar el tipo\n", 1, 4, 2)==0)
 							{
 									// con esto obtenemos el id y lo mandamos al add como llave foranea de Resource
 									auxTypeId = type_findIdByPos(arrayTypes, TYPE_LEN, auxTypeId);
@@ -136,6 +140,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 							{
 								printf("\nError al ingresar el id!\n\n");
 							}
+							printf("\n----------------------------------------------\n\n");
 						}
 						else
 						{
@@ -164,6 +169,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 									printf("\nNo existe el id seleccionado\n\n");
 								}
 							}
+							printf("\n----------------------------------------------\n\n");
 						}
 						else
 						{
@@ -173,11 +179,12 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 					case 4:
 						if(resource_isResourceAdded(arrayResources, RES_LEN)==0)
 						{
-							printf("\n\tLista de recursos de recursos\n");
+							printf("\n\tLista de recursos\n");
 							printf("\n----------------------------------------------\n");
-							// primero ordenamos el tipo, despues mostramos
-							resource_arrayAscendingOrder(arrayResources, RES_LEN);
+							// primero ordenamos el tipo, y adentro de esa funcion, llamamos a la que ordena la descripcion
+							resource_arrayAscendingOrderById(arrayResources, RES_LEN);
 							resource_printResources(arrayResources, RES_LEN);
+							printf("\n----------------------------------------------\n\n");
 						}
 						else
 						{
@@ -185,8 +192,11 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 						}
 						break;
 					case 5:
+						printf("\n\tLista de tipos\n");
+						printf("\n----------------------------------------------\n");
 						// para probar los tipos
 						type_printTypes(arrayTypes, TYPE_LEN);
+						printf("\n----------------------------------------------\n\n");
 						break;
 					default:
 						printf("\nLa opcion no existe!\n\n");
