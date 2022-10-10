@@ -11,13 +11,13 @@
 #define OCCUPIED 0
 
 
-void report_printResourcesByType(Resource arrayResources[], int lenResource, int TypeId)
+void report_printResourcesByType(Resource arrayResources[], int lenResource, int typeId)
 {
 	if(arrayResources!=NULL && lenResource>0)
 	{
 		for(int i=0;i<lenResource;i++)
 		{
-			if(arrayResources[i].typeId==TypeId)
+			if(arrayResources[i].typeId==typeId)
 			{
 				report_printResourceByType(&arrayResources[i]);
 			}
@@ -59,10 +59,29 @@ void report_printEventByDate(Event arrayEvents[])
 		}
 }
 
-void report_totalAmountEventByResource(Event arrayEvents[], int lenEvents, int ResourceId)
+int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, int resourceId)
 {
-	if(arrayEvents!=NULL && lenEvents>0 && ResourceId>0)
+	int auxResourceCount=0;
+	if(arrayEvents!=NULL && lenEvents>0 && resourceId>0)
 	{
-
+		for(int i=0;i<lenEvents;i++)
+		{
+			if(arrayEvents[i].resourceId == resourceId)
+			{
+				auxResourceCount++;
+			}
+		}
 	}
+	return auxResourceCount;
+}
+
+float report_totalAmountEventByResourcePrice(Event arrayEvents[], int lenEvents, int resourceCount, float pricePerHour)
+{
+	float auxTotalPrice;
+
+	if(arrayEvents!=NULL && lenEvents>0 && resourceCount>0 && pricePerHour>100)
+		{
+		auxTotalPrice = pricePerHour*resourceCount;
+		}
+	return auxTotalPrice;
 }

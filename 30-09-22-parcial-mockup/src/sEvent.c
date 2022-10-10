@@ -72,6 +72,42 @@ int event_isEventAdded(Event pArray[], int len)
 	return ret;
 }
 
+int event_findIsResourceAdded(Event pArray[], int len, int ResourceId)
+{
+	int ret=-1;
+	if(pArray!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].resourceId == ResourceId && pArray[i].isEmpty==OCCUPIED)
+			{
+				ret=0;
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
+
+int event_findEventAddedByDate(Event pArray[], int len, int day, int month, int year)
+{
+	int ret=-1;
+	if(pArray!=NULL && len>0 && day>0 && month>0 && year>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].eventDate.day == day && pArray[i].eventDate.month == month && pArray[i].eventDate.year == year)
+			{
+				// la fecha existe
+				ret=0;
+				break;
+			}
+		}
+	}
+	return ret;
+}
+
 int event_load(Event pArray[], int len, int ResourceId)
 {
 	int ret=-1;
@@ -82,7 +118,6 @@ int event_load(Event pArray[], int len, int ResourceId)
 	int auxYear;
 	if(pArray!=NULL && len>0)
 	{
-		printf("\n\tEstoy aca con el id ya seleccionado\n");
 		if(event_findEmptyArrayPosition(pArray, len)>-1)
 		{
 			if(utn_getInt(&auxAmount,"\nPor favor ingrese la cantidad (hora(s) - maximo 4 horas): ", "Error al ingresar la cantidad\n", 1,4, 2)==0) // maximo 4 horas, porque el mismo evento de mas horas es innecesario

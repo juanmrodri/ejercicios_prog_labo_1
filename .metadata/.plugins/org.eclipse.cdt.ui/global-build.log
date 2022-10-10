@@ -1,4 +1,12 @@
-18:10:20 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
+20:45:08 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
 Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\30-09-22-parcial-mockup.o" "..\\src\\30-09-22-parcial-mockup.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sEvent.o" "..\\src\\sEvent.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\menu.o" "..\\src\\menu.c" 
+..\src\menu.c: In function 'menu_resolve':
+..\src\menu.c:78:8: warning: variable 'auxPricePerHour' set but not used [-Wunused-but-set-variable]
+   78 |  float auxPricePerHour;
+      |        ^~~~~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sResource.o" "..\\src\\sResource.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\report.o" "..\\src\\report.c" 
 gcc -o 30-09-22-parcial-mockup.exe "src\\30-09-22-parcial-mockup.o" "src\\menu.o" "src\\report.o" "src\\sEvent.o" "src\\sResource.o" "src\\sType.o" "src\\utn_input.o" 

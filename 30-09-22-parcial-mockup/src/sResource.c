@@ -103,6 +103,42 @@ int resource_findIdTypeById(Resource pArray[], int len, int id)
 	return ret;
 }
 
+int resource_findResourcetAddedByType(Resource pArray[], int len, int typeId)
+{
+	int ret=-1;
+	if(pArray!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].typeId==typeId && pArray[i].isEmpty == OCCUPIED)
+			{
+				ret=0;
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
+
+float resource_findPriceById(Resource pArray[], int len, int id)
+{
+	float ret=-1;
+	if(pArray!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].idResource==id && pArray[i].isEmpty == OCCUPIED)
+			{
+				ret=pArray[i].pricePerHour;
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
+
 int resource_isResourceAdded(Resource pArray[], int len)
 {
 	int ret=-1;
@@ -122,7 +158,7 @@ int resource_isResourceAdded(Resource pArray[], int len)
 	return ret;
 }
 
-int resource_load(Resource pArray[], int len, int TypeId)
+int resource_load(Resource pArray[], int len, int typeId)
 {
 	int ret=-1;
 	char auxDescription[21];
@@ -133,14 +169,14 @@ int resource_load(Resource pArray[], int len, int TypeId)
 	{
 		indexFree = resource_findEmptyArrayPosition(pArray, len);
 
-		if(indexFree>-1 && pArray[indexFree].isEmpty==EMPTY && TypeId>999)
+		if(indexFree>-1 && pArray[indexFree].isEmpty==EMPTY && typeId>999)
 		{
 			if(utn_getTextWithPuntiationMarks(auxDescription, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 			{
 				if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
 				{
 							ret=0;
-							resource_add(pArray, len, auxDescription, auxPricePerHour, TypeId);
+							resource_add(pArray, len, auxDescription, auxPricePerHour, typeId);
 				}
 				else
 				{
@@ -169,7 +205,7 @@ int resource_load(Resource pArray[], int len, int TypeId)
 	return ret;
 }
 
-int resource_add(Resource pArray[], int len, char description[], float price, int TypeId)
+int resource_add(Resource pArray[], int len, char description[], float price, int typeId)
 {
 	int ret=-1;
 	int indexFree; // aca se guardara el primer index libre
@@ -180,7 +216,7 @@ int resource_add(Resource pArray[], int len, char description[], float price, in
 		pArray[indexFree].idResource = newIdGenerator();
 		strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
 		pArray[indexFree].pricePerHour=price;
-		pArray[indexFree].typeId=TypeId;
+		pArray[indexFree].typeId=typeId;
 		pArray[indexFree].isEmpty=OCCUPIED; // importantisimo cambiar el estado
 	}
 

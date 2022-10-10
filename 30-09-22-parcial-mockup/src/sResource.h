@@ -32,13 +32,17 @@ int resource_findEmptyArrayPosition(Resource pArray[], int len); // ok
 
 int resource_findById(Resource pArray[], int len, int id); // ok
 
-int resource_findIdTypeById(Resource pArray[], int len, int id);
+int resource_findIdTypeById(Resource pArray[], int len, int id); // ok
+
+int resource_findResourcetAddedByType(Resource pArray[], int len, int typeId); // ok
+
+float resource_findPriceById(Resource pArray[], int len, int id);
 
 int resource_isResourceAdded(Resource pArray[], int len); // ok
 
-int resource_load(Resource pArray[], int len, int TypeId); // ok
+int resource_load(Resource pArray[], int len, int typeId); // ok
 
-int resource_add(Resource pArray[], int len, char description[], float price, int TypeId); // ok
+int resource_add(Resource pArray[], int len, char description[], float price, int typeId); // ok
 
 int resource_modify(Resource pArray[], int len, int pos, int option); // ok
 

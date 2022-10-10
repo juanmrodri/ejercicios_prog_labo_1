@@ -12681,3 +12681,63 @@ java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResou
 
 !ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 17:27:49.119
 !MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 20:11:58.356
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 20:11:58.356
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 20:11:58.357
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 20:11:58.357
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2022-10-10 20:11:58.358
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:33:13.499
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.709
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.717
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.725
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.733
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.741
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.749
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.765
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2022-10-10 20:36:07.773
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException

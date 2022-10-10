@@ -40,6 +40,10 @@ int event_findEmptyArrayPosition(Event pArray[], int len); // ok
 
 int event_isEventAdded(Event pArray[], int len); // ok;
 
+int event_findIsResourceAdded(Event pArray[], int len, int ResourceId);
+
+int event_findEventAddedByDate(Event pArray[], int len, int day, int month, int year); // ok
+
 int event_load(Event pArray[], int len, int ResourceId); // ok
 
 int event_add(Event pArray[], int len, int amount, char location[], int day, int month, int year ,int ResourceId); // ok

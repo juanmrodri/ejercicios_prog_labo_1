@@ -13,12 +13,14 @@
 
 void report_printResourceByType(Resource arrayResources[]);
 
-void report_printResourcesByType(Resource arrayResources[], int lenResource, int TypeId);
+void report_printResourcesByType(Resource arrayResources[], int lenResource, int typeId);
 
 void report_printEventByDate(Event arrayEvents[]);
 
 void report_printEventsByDate(Event arrayEvents[], int lenEvents, int day, int month, int year);
 
-void report_totalAmountEventByResource(Event arrayEvents[], int lenEvents, int ResourceId);
+int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, int resourceId);
+
+float report_totalAmountEventByResourcePrice(Event arrayEvents[], int lenEvents, int resourceCount, float pricePerHour);
 
 #endif /* REPORT_H_ */
