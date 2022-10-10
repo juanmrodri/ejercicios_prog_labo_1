@@ -9,7 +9,6 @@
 
 #define EMPTY 1
 #define OCCUPIED 0
-#define LEN_DESCRIPTION
 
 // static functions
 

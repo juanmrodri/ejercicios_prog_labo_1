@@ -13,10 +13,12 @@
 #include "utn_input.h"
 #include "sResource.h"
 #include "sType.h"
+#include "sEvent.h"
+#include "report.h"
 
 int menu_show(int*  response);
 
-int menu_resolve(int response, Resource arrayResources[], int lenResource, Type arrayTypes[], int lenType);
+int menu_resolve(int response, Resource arrayResources[], int lenResource, Type arrayTypes[], int lenType, Event arrayEvents[], int lenEvents);
 
 
 

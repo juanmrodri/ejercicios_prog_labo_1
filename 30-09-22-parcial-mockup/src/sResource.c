@@ -8,7 +8,6 @@
 #include "sResource.h"
 #include "utn_input.h"
 
-
 #define EMPTY 1
 #define OCCUPIED 0
 
@@ -76,9 +75,27 @@ int resource_findById(Resource pArray[], int len, int id)
 	{
 		for(int i=0;i<len;i++)
 		{
-			if(pArray[i].idResource==id)
+			if(pArray[i].idResource==id && pArray[i].isEmpty==OCCUPIED)
 			{
 				ret=i;
+				break;
+			}
+		}
+	}
+	return ret;
+}
+
+int resource_findIdTypeById(Resource pArray[], int len, int id)
+{
+	int ret=-1;
+
+	if(pArray!=NULL && len>0 && id>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(pArray[i].idResource==id)
+			{
+				ret=pArray[i].typeId;
 				break;
 			}
 		}
@@ -105,24 +122,25 @@ int resource_isResourceAdded(Resource pArray[], int len)
 	return ret;
 }
 
-int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
+int resource_load(Resource pArray[], int len, int TypeId)
 {
 	int ret=-1;
 	char auxDescription[21];
 	float auxPricePerHour;
 	int indexFree;
 
-	if(pArrayRes!=NULL && lenRes>0)
+	if(pArray!=NULL && len>0)
 	{
-		indexFree = resource_findEmptyArrayPosition(pArrayRes, lenRes);
+		indexFree = resource_findEmptyArrayPosition(pArray, len);
 
-		if(indexFree>-1 && pArrayRes[indexFree].isEmpty==EMPTY && TypeId>999)
+		if(indexFree>-1 && pArray[indexFree].isEmpty==EMPTY && TypeId>999)
 		{
 			if(utn_getTextWithPuntiationMarks(auxDescription, 21, "\nPor favor ingrese la descripcion del recurso: ", "Error al ingresar la descripcion\n", 2)==0)
 			{
 				if(utn_getFloat(&auxPricePerHour, "\nPor favor ingrese el precio por hora ($100 - $1500000): ", "Error al ingresar el precio\n", 100, 1500000, 2)==0)
 				{
-							resource_add(pArrayRes, lenRes, auxDescription, auxPricePerHour, TypeId);
+							ret=0;
+							resource_add(pArray, len, auxDescription, auxPricePerHour, TypeId);
 				}
 				else
 				{
@@ -151,18 +169,18 @@ int resource_load(Resource pArrayRes[], int lenRes, int TypeId)
 	return ret;
 }
 
-int resource_add(Resource pArray[], int len, char description[], float price, int idType)
+int resource_add(Resource pArray[], int len, char description[], float price, int TypeId)
 {
 	int ret=-1;
 	int indexFree; // aca se guardara el primer index libre
 
-	if(pArray!=NULL && len>0 && description!=NULL && price>0) // typeId>0
+	if(pArray!=NULL && len>0 && description!=NULL && price>0) // typeId>0, al estar hardcodeado, no hace falta
 	{
 		indexFree = resource_findEmptyArrayPosition(pArray, len);
 		pArray[indexFree].idResource = newIdGenerator();
 		strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
 		pArray[indexFree].pricePerHour=price;
-		pArray[indexFree].typeId=idType;
+		pArray[indexFree].typeId=TypeId;
 		pArray[indexFree].isEmpty=OCCUPIED; // importantisimo cambiar el estado
 	}
 
@@ -298,9 +316,12 @@ int resource_remove(Resource pArray[], int len, int id)
 					printf("\nError al elegir opcion\n\n");
 				}
 			}
-			ret=-1;
-			printf("\nError en el id\n\n");
 		}
+	}
+	else
+	{
+		ret=-1;
+		printf("\nError en el id, estoy aca eh!\n\n");
 	}
 	return ret;
 }

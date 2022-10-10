@@ -34,5 +34,19 @@ typedef struct
 
 } Event;
 
+int event_initArray(Event pArray[], int len); // ok
+
+int event_findEmptyArrayPosition(Event pArray[], int len); // ok
+
+int event_isEventAdded(Event pArray[], int len); // ok;
+
+int event_load(Event pArray[], int len, int ResourceId); // ok
+
+int event_add(Event pArray[], int len, int amount, char location[], int day, int month, int year ,int ResourceId); // ok
+
+int event_printEvent(Event pArray[]); // ok
+
+int event_printEvents(Event pArray[], int len); // ok
+
 
 #endif /* SEVENT_H_ */

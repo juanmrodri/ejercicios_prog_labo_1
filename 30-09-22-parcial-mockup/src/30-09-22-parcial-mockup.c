@@ -54,38 +54,48 @@
 #include "sEvent.h"
 #include "menu.h"
 
-#define RES_LEN 10
+#define RES_LEN 15
 #define TYPE_LEN 4
+#define EVENT_LEN 10
 
 int main(void) {
 	setbuf(stdout, NULL);
 
 	int response;
 
-	Resource arrayResources[RES_LEN]; // por ahora 10
+	Resource arrayResources[RES_LEN]; // por ahora 15
 
 	Type arrayTypes[TYPE_LEN];
+
+	Event arrayEvents[EVENT_LEN];
 
 	resource_initArray(arrayResources, RES_LEN);
 
 	type_initArray(arrayTypes, TYPE_LEN);
+
+	event_initArray(arrayEvents,EVENT_LEN);
 
 	type_forceLoad(arrayTypes, TYPE_LEN, "ANIMACION");
 	type_forceLoad(arrayTypes, TYPE_LEN, "DJ");
 	type_forceLoad(arrayTypes, TYPE_LEN, "ILUMINACION");
 	type_forceLoad(arrayTypes, TYPE_LEN, "LOCUCION");
 
-	// los type id = 1000 - LOCUCION; 1001 - ANIMACION; 1002 - ILUMINACION; 1003 - DJ
-	resource_forceLoad(arrayResources, RES_LEN, "Actor, mago", 12500, 1003);
+	/*los type ids =
+	 * 1000 - ANIMACION
+	 * 1001 - DJ
+	 * 1002 - ILUMINACION
+	 * 1003 - LOCUCION
+	 * */
+	resource_forceLoad(arrayResources, RES_LEN, "Actor, mago", 12500, 1000);
 	resource_forceLoad(arrayResources, RES_LEN, "Luces, leds,camaras", 1200, 1002);
 	resource_forceLoad(arrayResources, RES_LEN, "Leds", 20000, 1002);
-	resource_forceLoad(arrayResources, RES_LEN, "Hernan Cattaneo", 350000, 1000);
-	resource_forceLoad(arrayResources, RES_LEN, "Principi", 20000, 1000);
-	resource_forceLoad(arrayResources, RES_LEN, "Pablo y Pachu", 350000, 1002);
-	resource_forceLoad(arrayResources, RES_LEN, "Pichu", 200000, 1002);
-	resource_forceLoad(arrayResources, RES_LEN, "Brzp", 350000, 1003);
-	resource_forceLoad(arrayResources, RES_LEN, "Jamie Hewlett", 350000, 1001);
-	resource_forceLoad(arrayResources, RES_LEN, "Daft Punk", 350000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Hernan Cattaneo", 350000, 1001);
+	resource_forceLoad(arrayResources, RES_LEN, "Principi", 20000, 1003);
+	resource_forceLoad(arrayResources, RES_LEN, "Pablo y Pachu", 350000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Pichu", 200000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Brzp", 350000, 1001);
+	resource_forceLoad(arrayResources, RES_LEN, "Jamie Hewlett", 350000, 1000);
+	resource_forceLoad(arrayResources, RES_LEN, "Daft Punk", 350000, 1001);
 	//menu
 
 	do
@@ -93,7 +103,7 @@ int main(void) {
 
 		if(menu_show(&response)==0) // aca llamamos a todo el menu
 		{
-			menu_resolve(response, arrayResources, RES_LEN, arrayTypes, TYPE_LEN);
+			menu_resolve(response, arrayResources, RES_LEN, arrayTypes, TYPE_LEN, arrayEvents, EVENT_LEN);
 		}
 		else
 		{
