@@ -76,6 +76,8 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 	int auxMonth;
 	int auxYear;
 	float auxPricePerHour;
+	int auxAmountResourseIdInEvent;
+	float auxAmountResourseTotalPrice;
 
 	if(response>0 && response <9 && arrayResources!=NULL && arrayTypes!=NULL)
 	{
@@ -266,8 +268,13 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 											type_printTypes(arrayTypes, TYPE_LEN);
 											if(utn_getInt(&auxTypeId, "Por favor ingrese el tipo de recurso (1- Animacion 2- Dj 3- Iluminacion 4- Locucion): ", "Error al ingresar el tipo\n", 1, 4, 2)==0)
 											{
+
 												// con esto obtenemos el id y lo mandamos al add como llave foranea de Resource
 												auxTypeId = type_findIdByPos(arrayTypes, TYPE_LEN, auxTypeId);
+
+												printf("\n\tSe selecciono el siguiente tipo\n");
+												type_printType(&arrayTypes[type_findPosById(arrayTypes, TYPE_LEN, auxTypeId)]);
+												printf("\n----------------------------------------------\n");
 
 												// chequeamos que exista cargado el tipo ingresado, por lo menos 1
 												if(resource_findResourcetAddedByType(arrayResources, RES_LEN, auxTypeId)==0)
@@ -288,79 +295,154 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 										}
 										break;
 									case 2:
-										if(event_isEventAdded(arrayEvents, EVENT_LEN)==0)
+										if(resource_isResourceAdded(arrayResources, RES_LEN)==0)
 										{
-											printf("\n\tIngrese la fecha que quere consultar:\n");
-											if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
+											if(event_isEventAdded(arrayEvents, EVENT_LEN)==0)
 											{
-												if(utn_getInt(&auxMonth,"\nPor favor ingrese la fecha del evento(mes): ", "Error al ingresar el mes\n", 1,12, 2)==0)
+												printf("\n\tIngrese la fecha que quere consultar:\n");
+												if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
 												{
-													if(utn_getInt(&auxYear,"\nPor favor ingrese la fecha del evento(anio) - hasta 2024: ", "Error al ingresar el anio\n", 2022,2024, 2)==0)
+													if(utn_getInt(&auxMonth,"\nPor favor ingrese la fecha del evento(mes): ", "Error al ingresar el mes\n", 1,12, 2)==0)
 													{
-														printf("\n\tEventos efectuados en %d/%d/%d\n",auxDay,auxMonth,auxYear);
-														printf("\n----------------------------------------------\n");
-														if(event_findEventAddedByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear)==0)
+														if(utn_getInt(&auxYear,"\nPor favor ingrese la fecha del evento(anio) - hasta 2024: ", "Error al ingresar el anio\n", 2022,2024, 2)==0)
 														{
-															// la fecha existe por lo menos una vez
-															report_printEventsByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear);
+															printf("\n\tEventos efectuados en %d/%d/%d\n",auxDay,auxMonth,auxYear);
+															printf("\n----------------------------------------------\n");
+															if(event_findEventAddedByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear)==0)
+															{
+																// la fecha existe por lo menos una vez
+																report_printEventsByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear);
+															}
+															else
+															{
+																// la fecha no tiene eventos
+																printf("\nNo hay eventos programados para la fecha ingresada!\n\n");
+															}
 														}
 														else
 														{
-															// la fecha no tiene eventos
-															printf("\nNo hay eventos programados para la fecha ingresada!\n\n");
+															printf("\nSe produjo un error al ingresar la fecha(anio)!\n");
 														}
 													}
 													else
 													{
-														printf("\nSe produjo un error al ingresar la fecha(anio)!\n");
+														printf("\nSe produjo un error al ingresar la fecha(mes)!\n");
 													}
 												}
 												else
 												{
-													printf("\nSe produjo un error al ingresar la fecha(mes)!\n");
+													printf("\nSe produjo un error al ingresar la fecha(dia)!\n");
 												}
 											}
 											else
 											{
-												printf("\nSe produjo un error al ingresar la fecha(dia)!\n");
+												printf("\nNo existen eventos ingresados para mostrar!\n\n");
 											}
 										}
 										else
 										{
-											printf("\nNo existen eventos ingresados para listar!\n\n");
+											printf("\nNo existen recursos ingresados ingresados para mostrar!\n\n");
 										}
 										break;
 									case 3:
-										printf("\nInforme 3\n\n");
-
-										printf("\n\tImporte total de eventos en recurso seleccionado\n");
-										printf("\n----------------------------------------------\n");
-										resource_printResources(arrayResources, RES_LEN);
-										if(utn_getInt(&auxId, "Ingrese el Id del recurso para calcular  el importe: ",  "\nError al ingresar opcion!\n\n", 1, RES_LEN, 2)==0)
+										if(resource_isResourceAdded(arrayResources, RES_LEN)==0)
 										{
-											// esto significa que el id existe, pero en el array recursos
-											if(resource_findById(arrayResources, RES_LEN,auxId)>-1)
+											if(event_isEventAdded(arrayEvents, EVENT_LEN)==0)
 											{
-												// esto si da 0 significa que existe por lo menos 1 recurso con el id ingresado, entonces no es al pedo hacer el calculo
-												if(event_findIsResourceAdded(arrayEvents, EVENT_LEN, auxId)==0)
+												printf("\n\tImporte total de eventos en recurso seleccionado\n");
+												printf("\n----------------------------------------------\n");
+												event_printEvents(arrayEvents, EVENT_LEN);
+												if(utn_getInt(&auxId, "Ingrese el Id del recurso para calcular  el importe: ",  "\nError al ingresar opcion!\n\n", 1, RES_LEN, 2)==0)
 												{
-													// aca si existe, entonces tenemos que conseguir el importe por hora
-													auxPricePerHour = resource_findPriceById(arrayResources, RES_LEN, auxId);
+													printf("\n\tSe selecciono el siguiente recurso\n");
+													resource_printResource(&arrayResources[resource_findById(arrayResources, RES_LEN,auxId)]);
+													printf("\n----------------------------------------------\n");
+													// esto significa que el id existe, pero en el array recursos
+													if(resource_findById(arrayResources, RES_LEN,auxId)>-1)
+													{
+														// esto si da 0 significa que existe por lo menos 1 recurso con el id ingresado, en eventos, entonces no es al pedo hacer el calculo
+														if(event_findIsResourceAdded(arrayEvents, EVENT_LEN, auxId)==0)
+														{
+															// aca si existe, entonces tenemos que conseguir el importe por hora
+															auxPricePerHour = resource_findPriceById(arrayResources, RES_LEN, auxId);
 
-													// aca buscamos cuantas veces se repite ese id en eventos
+															// aca buscamos cuantas veces se repite ese id en eventos
+															auxAmountResourseIdInEvent = report_totalAmountEventByResourceCount(arrayEvents, EVENT_LEN, auxId);
 
-												}
-												else
-												{
-													// No existe eventos con el recurso seleccionado
-													printf("\nNo hay eventos programados para la fecha ingresada!\n\n");
+															// hacemos el calculo
+															auxAmountResourseTotalPrice = report_totalAmountEventByResourcePrice(auxAmountResourseIdInEvent, auxPricePerHour);
+
+															// lo mostramos
+															report_totalAmountEventByResourcePrint(auxAmountResourseTotalPrice);
+														}
+														else
+														{
+															// No existe eventos con el recurso seleccionado
+															printf("\nNo hay eventos con el recurso ingresado!\n\n");
+														}
+													}
 												}
 											}
+											else
+											{
+												printf("\nNo hay eventos ingresados al momento, no se puede informar!\n\n");
+											}
+										}
+										else
+										{
+											printf("\nNo hay recursos ingresados al momento, no se puede informar!\n\n");
 										}
 
 										break;
 									case 4:
-										printf("\nInforme 4\n\n");
+										if(resource_isResourceAdded(arrayResources, RES_LEN)==0)
+										{
+											if(event_isEventAdded(arrayEvents, EVENT_LEN)==0)
+											{
+												printf("\n\tIngrese la fecha para calcular el importe total por tipos:\n");
+												if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
+												{
+													if(utn_getInt(&auxMonth,"\nPor favor ingrese la fecha del evento(mes): ", "Error al ingresar el mes\n", 1,12, 2)==0)
+													{
+														if(utn_getInt(&auxYear,"\nPor favor ingrese la fecha del evento(anio) - hasta 2024: ", "Error al ingresar el anio\n", 2022,2024, 2)==0)
+														{
+															printf("\n\tEventos efectuados en %d/%d/%d\n",auxDay,auxMonth,auxYear);
+															printf("\n----------------------------------------------\n");
+															if(event_findEventAddedByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear)==0)
+															{
+																// la fecha existe por lo menos una vez
+																report_printEventsByDate(arrayEvents, EVENT_LEN, auxDay, auxMonth, auxYear);
+															}
+															else
+															{
+																// la fecha no tiene eventos
+																printf("\nNo hay eventos programados para la fecha ingresada!\n\n");
+															}
+														}
+														else
+														{
+															printf("\nSe produjo un error al ingresar la fecha(anio)!\n");
+														}
+													}
+													else
+													{
+														printf("\nSe produjo un error al ingresar la fecha(mes)!\n");
+													}
+												}
+												else
+												{
+													printf("\nSe produjo un error al ingresar la fecha(dia)!\n");
+												}
+											}
+											else
+											{
+												printf("\nNo hay eventos ingresados al momento, no se puede informar!\n\n");
+											}
+										}
+										else
+										{
+											printf("\nNo hay recursos ingresados al momento, no se puede informar!\n\n");
+										}
 										break;
 									default:
 										printf("\nLa opcion ingresada no existe!\n\n");

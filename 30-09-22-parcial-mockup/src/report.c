@@ -62,6 +62,7 @@ void report_printEventByDate(Event arrayEvents[])
 int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, int resourceId)
 {
 	int auxResourceCount=0;
+	int auxAmountCount=0;
 	if(arrayEvents!=NULL && lenEvents>0 && resourceId>0)
 	{
 		for(int i=0;i<lenEvents;i++)
@@ -69,19 +70,29 @@ int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, i
 			if(arrayEvents[i].resourceId == resourceId)
 			{
 				auxResourceCount++;
+				auxAmountCount = arrayEvents[i].amount;
 			}
 		}
 	}
+	auxResourceCount=auxResourceCount*auxAmountCount;
 	return auxResourceCount;
 }
 
-float report_totalAmountEventByResourcePrice(Event arrayEvents[], int lenEvents, int resourceCount, float pricePerHour)
+float report_totalAmountEventByResourcePrice(int resourceCount, float pricePerHour)
 {
 	float auxTotalPrice;
 
-	if(arrayEvents!=NULL && lenEvents>0 && resourceCount>0 && pricePerHour>100)
+	if(resourceCount>0 && pricePerHour>100)
 		{
 		auxTotalPrice = pricePerHour*resourceCount;
 		}
 	return auxTotalPrice;
+}
+
+void report_totalAmountEventByResourcePrint(float totalPrice)
+{
+	if( totalPrice >0)
+	{
+		printf("\nImporte total: $%.2f\n\n" ,totalPrice);
+	}
 }

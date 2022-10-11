@@ -69,7 +69,7 @@ int type_findIdByPos(Type pArray[], int len, int pos)
 	return id;
 }
 
-/*
+
 int type_findPosById(Type pArray[], int len, int id)
 {
 	int auxPos;
@@ -88,7 +88,7 @@ int type_findPosById(Type pArray[], int len, int id)
 
 	return auxPos;
 }
-*/
+
 
 void type_forceLoad(Type pArray[], int len, char description[])
 {

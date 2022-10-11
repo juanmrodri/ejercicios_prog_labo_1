@@ -28,7 +28,7 @@ int type_findEmptyArrayPosition(Type pArray[], int len); // ok
 
 int type_findIdByPos(Type pArray[], int len, int pos); // ok
 
-// int type_findPosById(Type pArray[], int len, int id); // ok
+int type_findPosById(Type pArray[], int len, int id); // ok
 
 void type_forceLoad(Type pArray[], int len, char description[]); // ok
 

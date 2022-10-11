@@ -21,6 +21,8 @@ void report_printEventsByDate(Event arrayEvents[], int lenEvents, int day, int m
 
 int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, int resourceId);
 
-float report_totalAmountEventByResourcePrice(Event arrayEvents[], int lenEvents, int resourceCount, float pricePerHour);
+float report_totalAmountEventByResourcePrice(int resourceCount, float pricePerHour);
+
+void report_totalAmountEventByResourcePrint(float totalPrice);
 
 #endif /* REPORT_H_ */
