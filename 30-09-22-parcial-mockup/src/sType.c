@@ -32,6 +32,7 @@ int type_initArray(Type pArray[], int len)
 			{
 				pArray[i].isEmpty = EMPTY;
 			}
+			ret=0;
 		}
 
 	return ret;
@@ -123,6 +124,7 @@ int type_printType(Type pArray[])
 	int ret=-1;
 		if(pArray!=NULL)
 		{
+			ret=0;
 			printf("\nid: %d\n------------\n"
 						"Descripcion: %s\n\n", pArray->idType, pArray->description);
 		}
@@ -141,6 +143,7 @@ int type_printTypes(Type pArray[], int len)
 					type_printType(&pArray[i]);
 				}
 			}
+			ret=0;
 		}
 	return ret;
 }

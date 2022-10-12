@@ -33,6 +33,7 @@ int resource_initArray(Resource pArray[], int len)
 		{
 			pArray[i].isEmpty = EMPTY;
 		}
+		ret=0;
 	}
 
 	return ret;
@@ -212,6 +213,7 @@ int resource_add(Resource pArray[], int len, char description[], float price, in
 
 	if(pArray!=NULL && len>0 && description!=NULL && price>0) // typeId>0, al estar hardcodeado, no hace falta
 	{
+		ret=0;
 		indexFree = resource_findEmptyArrayPosition(pArray, len);
 		pArray[indexFree].idResource = newIdGenerator();
 		strncpy(pArray[indexFree].description,description,sizeof(pArray[indexFree].description));
@@ -357,7 +359,7 @@ int resource_remove(Resource pArray[], int len, int id)
 	else
 	{
 		ret=-1;
-		printf("\nError en el id, estoy aca eh!\n\n");
+		printf("\nError en el id!\n\n");
 	}
 	return ret;
 }
@@ -395,6 +397,7 @@ int resource_printResource(Resource pArray[])
 
 	if(pArray!=NULL)
 	{
+		ret=0;
 		printf("\nid: %d\n-------\n"
 					"Descripcion:%s\n"
 					"Precio por hora: $%.2f\n"
@@ -412,6 +415,7 @@ int resource_printResources(Resource pArray[], int len)
 		{
 			if(pArray[i].isEmpty==OCCUPIED)
 			{
+				ret=0;
 				resource_printResource(&pArray[i]);
 			}
 		}
