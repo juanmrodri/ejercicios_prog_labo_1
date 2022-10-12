@@ -25,4 +25,6 @@ float report_totalAmountEventByResourcePrice(int resourceCount, float pricePerHo
 
 void report_totalAmountEventByResourcePrint(float totalPrice);
 
+int report_findResourceTypeByIdResource(Event arrayEvents[], int lenEvents, int day, int month, int year, Resource arrayResources[], int lenResource);
+
 #endif /* REPORT_H_ */

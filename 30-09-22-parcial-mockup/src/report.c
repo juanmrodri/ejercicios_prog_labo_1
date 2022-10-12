@@ -96,3 +96,94 @@ void report_totalAmountEventByResourcePrint(float totalPrice)
 		printf("\nImporte total: $%.2f\n\n" ,totalPrice);
 	}
 }
+
+
+int report_findResourceTypeByIdResource(Event arrayEvents[], int lenEvents, int day, int month, int year, Resource arrayResources[], int lenResource)
+{
+	int ret=-1;
+	int auxAmount;
+	float auxPricePerHour;
+	float auxTotalType;
+	float auxTotalTypeOne=0;
+	float auxTotalTypeTwo=0;
+	float auxTotalTypeThree=0;
+	float auxTotalTypeFour=0;
+
+	if(arrayEvents!=NULL && lenEvents>0)
+	{
+		for(int i=0;i<lenEvents;i++)
+		{
+			if(arrayEvents[i].eventDate.day==day && arrayEvents[i].eventDate.month==month && arrayEvents[i].eventDate.year)
+			{
+				for(int j=0;j<lenResource;j++)
+				{
+						if(arrayResources[j].idResource == arrayEvents[i].resourceId)
+						{
+							/*
+							printf("\ntipo disponible: %d\n\n", arrayResources[j].typeId);
+
+							printf("\nEl evento con este tipo:\n"
+										"(evento)cantidad: %d\n"
+										"(recurso)precio por hora: %.2f\n\n", arrayEvents[i].amount,arrayResources[j].pricePerHour);
+							*/
+							auxAmount = arrayEvents[i].amount;
+							auxPricePerHour = arrayResources[j].pricePerHour;
+							auxTotalType = auxPricePerHour*auxAmount;
+
+							//printf("\nTotal por tipo%d: %.2f\n\n", arrayResources[j].typeId,auxTotalType);
+							if(arrayResources[j].typeId==1000)
+							{
+								auxTotalTypeOne = auxTotalTypeOne + auxTotalType;
+							}
+							else
+									{
+										if(arrayResources[j].typeId==1001)
+											{
+											auxTotalTypeTwo = auxTotalTypeTwo + auxTotalType;
+											}
+										else
+												{
+													if(arrayResources[j].typeId==1002)
+													{
+														auxTotalTypeThree = auxTotalTypeThree + auxTotalType;
+													}
+													else
+															{
+																if(arrayResources[j].typeId==1003)
+																{
+																	auxTotalTypeFour = auxTotalTypeFour + auxTotalType;
+																}
+															}
+												}
+									}
+						}
+				}
+			}
+		}
+		if(auxTotalTypeOne>0)
+		{
+			printf("\nTotal Animacion: $%.2f\n\n", auxTotalTypeOne);
+		}
+		if(auxTotalTypeTwo>0)
+		{
+			printf("\nTotal Dj: $%.2f\n\n", auxTotalTypeTwo);
+
+		}
+		if(auxTotalTypeThree>0)
+		{
+			printf("\nTotal Iluminacion: $%.2f\n\n", auxTotalTypeThree);
+
+		}
+		if(auxTotalTypeFour>0)
+		{
+			printf("\nTotal Locucion: $%.2f\n\n", auxTotalTypeFour);
+		}
+	}
+
+	return ret;
+
+}
+
+
+
+
