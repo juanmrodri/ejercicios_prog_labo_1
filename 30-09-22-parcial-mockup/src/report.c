@@ -19,20 +19,17 @@ void report_printResourcesByType(Resource arrayResources[], int lenResource, int
 		{
 			if(arrayResources[i].typeId==typeId)
 			{
-				report_printResourceByType(&arrayResources[i]);
+				report_printResourceByType(arrayResources[i]);
 			}
 		}
 	}
 }
 
-void report_printResourceByType(Resource arrayResources[])
+void report_printResourceByType(Resource resource)
 {
-	if(arrayResources!=NULL)
-	{
 		printf("\nid: %d\n-------\n"
 					"Descripcion:%s\n"
-					"Precio por hora: $%.2f\n\n", arrayResources->idResource,arrayResources->description,arrayResources->pricePerHour);
-	}
+					"Precio por hora: $%.2f\n\n", resource.idResource,resource.description,resource.pricePerHour);
 }
 
 void report_printEventsByDate(Event arrayEvents[], int lenEvents, int day, int month, int year)
@@ -43,20 +40,17 @@ void report_printEventsByDate(Event arrayEvents[], int lenEvents, int day, int m
 			{
 				if(arrayEvents[i].eventDate.day==day && arrayEvents[i].eventDate.month==month && arrayEvents[i].eventDate.year)
 				{
-					report_printEventByDate(&arrayEvents[i]);
+					report_printEventByDate(arrayEvents[i]);
 				}
 			}
 		}
 }
 
-void report_printEventByDate(Event arrayEvents[])
+void report_printEventByDate(Event event)
 {
-	if(arrayEvents!=NULL)
-		{
 			printf("\nid: %d\n-------\n"
 						"Cantidad: %d\n"
-						"Localidad: %s\n\n", arrayEvents->idEvent,arrayEvents->amount,arrayEvents->location);
-		}
+						"Localidad: %s\n\n", event.idEvent,event.amount,event.location);
 }
 
 int report_totalAmountEventByResourceCount(Event arrayEvents[], int lenEvents, int resourceId)
@@ -98,9 +92,8 @@ void report_totalAmountEventByResourcePrint(float totalPrice)
 }
 
 
-int report_findResourceTypeByIdResource(Event arrayEvents[], int lenEvents, int day, int month, int year, Resource arrayResources[], int lenResource)
+void report_findResourceTypeByIdResource(Event arrayEvents[], int lenEvents, int day, int month, int year, Resource arrayResources[], int lenResource)
 {
-	int ret=-1;
 	int auxAmount;
 	float auxPricePerHour;
 	float auxTotalType;
@@ -136,54 +129,54 @@ int report_findResourceTypeByIdResource(Event arrayEvents[], int lenEvents, int 
 								auxTotalTypeOne = auxTotalTypeOne + auxTotalType;
 							}
 							else
+								{
+								if(arrayResources[j].typeId==1001)
+								{
+									auxTotalTypeTwo = auxTotalTypeTwo + auxTotalType;
+								}
+								else
 									{
-										if(arrayResources[j].typeId==1001)
-											{
-											auxTotalTypeTwo = auxTotalTypeTwo + auxTotalType;
-											}
+										if(arrayResources[j].typeId==1002)
+										{
+											auxTotalTypeThree = auxTotalTypeThree + auxTotalType;
+										}
 										else
+											{
+												if(arrayResources[j].typeId==1003)
 												{
-													if(arrayResources[j].typeId==1002)
-													{
-														auxTotalTypeThree = auxTotalTypeThree + auxTotalType;
-													}
-													else
-															{
-																if(arrayResources[j].typeId==1003)
-																{
-																	auxTotalTypeFour = auxTotalTypeFour + auxTotalType;
-																}
-															}
+													auxTotalTypeFour = auxTotalTypeFour + auxTotalType;
 												}
+											}
 									}
+								}
 						}
 				}
 			}
 		}
-		if(auxTotalTypeOne>0)
-		{
-			printf("\nTotal Animacion: $%.2f\n\n", auxTotalTypeOne);
-		}
-		if(auxTotalTypeTwo>0)
-		{
-			printf("\nTotal Dj: $%.2f\n\n", auxTotalTypeTwo);
-
-		}
-		if(auxTotalTypeThree>0)
-		{
-			printf("\nTotal Iluminacion: $%.2f\n\n", auxTotalTypeThree);
-
-		}
-		if(auxTotalTypeFour>0)
-		{
-			printf("\nTotal Locucion: $%.2f\n\n", auxTotalTypeFour);
-		}
+		report_findResourceTypeByIdResourceResultPrints(auxTotalTypeOne, auxTotalTypeTwo, auxTotalTypeThree, auxTotalTypeFour);
 	}
-
-	return ret;
-
 }
 
 
+void report_findResourceTypeByIdResourceResultPrints(float auxTotalTypeOne, float auxTotalTypeTwo, float auxTotalTypeThree, float auxTotalTypeFour)
+{
+	if(auxTotalTypeOne>0)
+	{
+		printf("\nTotal Animacion: $%.2f\n\n", auxTotalTypeOne);
+	}
+	if(auxTotalTypeTwo>0)
+	{
+		printf("\nTotal Dj: $%.2f\n\n", auxTotalTypeTwo);
 
+	}
+	if(auxTotalTypeThree>0)
+	{
+		printf("\nTotal Iluminacion: $%.2f\n\n", auxTotalTypeThree);
+
+	}
+	if(auxTotalTypeFour>0)
+	{
+		printf("\nTotal Locucion: $%.2f\n\n", auxTotalTypeFour);
+	}
+}
 

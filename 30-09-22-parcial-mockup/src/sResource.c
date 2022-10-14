@@ -329,7 +329,7 @@ int resource_remove(Resource pArray[], int len, int id)
 			{
 				//es el id seleccionado
 				printf("\nEsta por dar de baja: \n\n");
-				resource_printResource(&pArray[i]);
+				resource_printResource(pArray[i]);
 				if(utn_getInt(&auxResponse, "\ndesea continuar? (1 si- 2 no): ", "\nPor favor elija una opcion correcta", 1, 2, 2)==0)
 				{
 					if(auxResponse==1)
@@ -364,63 +364,53 @@ int resource_remove(Resource pArray[], int len, int id)
 	return ret;
 }
 
-int resource_printResource(Resource pArray[])
+void resource_printResource(Resource resource)
 {
-	int ret=-1;
 	char auxDescription[31];
 
-	if(pArray->typeId == 1000)
+	if(resource.typeId == 1000)
 	{
 		strncpy(auxDescription,"Animacion",31);
 	}
 	else
 	{
-		if(pArray->typeId == 1001)
+		if(resource.typeId == 1001)
 		{
 			strncpy(auxDescription,"Dj",31);
 		}
 		else
 		{
-			if(pArray->typeId == 1002)
+			if(resource.typeId == 1002)
 			{
 				strncpy(auxDescription,"Iluminacion",31);
 			}
 			else
 			{
-				if(pArray->typeId == 1003)
+				if(resource.typeId == 1003)
 				{
 					strncpy(auxDescription,"Locucion",31);
 				}
 			}
 		}
 	}
-
-	if(pArray!=NULL)
-	{
-		ret=0;
-		printf("\nid: %d\n-------\n"
-					"Descripcion:%s\n"
-					"Precio por hora: $%.2f\n"
-					"Tipo: %s\n\n", pArray->idResource,pArray->description,pArray->pricePerHour,auxDescription);
-	}
-	return ret;
+	printf("\nid: %d\n-------\n"
+				"Descripcion:%s\n"
+				"Precio por hora: $%.2f\n"
+				"Tipo: %s\n\n", resource.idResource,resource.description,resource.pricePerHour,auxDescription);
 }
 
-int resource_printResources(Resource pArray[], int len)
+void resource_printResources(Resource pArray[], int len)
 {
-	int ret=-1;
 	if(pArray!=NULL && len>0)
 	{
 		for(int i=0;i<len;i++)
 		{
 			if(pArray[i].isEmpty==OCCUPIED)
 			{
-				ret=0;
-				resource_printResource(&pArray[i]);
+				resource_printResource(pArray[i]);
 			}
 		}
 	}
-	return ret;
 }
 
 void resource_arrayAscendingOrderById(Resource pArray[], int len)
@@ -445,7 +435,7 @@ void resource_arrayAscendingOrderById(Resource pArray[], int len)
 			}
 		}
 		resource_arrayAscendingOrderByDescription(pArray, len);
-		len--;
+		newLen--;
 	}while(flagSwap);
 
 }
@@ -470,7 +460,7 @@ void resource_arrayAscendingOrderByDescription(Resource pArray[], int len)
 				pArray[i+1] = bufferPos;
 			}
 		}
-		len--;
+		newLen--;
 
 	}while(flagSwap);
 }

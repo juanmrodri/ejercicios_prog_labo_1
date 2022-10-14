@@ -28,7 +28,7 @@ typedef struct
 * \brief inicializa un array asignando valor 0 a "campo" isEmpty de la estructura
 * \param pArray array de estructuras
 * \param len longitud del array
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_initArray(Resource pArray[], int len); // ok
 
@@ -73,7 +73,7 @@ int resource_findIdTypeById(Resource pArray[], int len, int id); // ok
 * \param pArray array de estructuras
 * \param len longitud del array
 * \param typeId por valor
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_findResourcetAddedByType(Resource pArray[], int len, int typeId); // ok
 
@@ -90,7 +90,7 @@ float resource_findPriceById(Resource pArray[], int len, int id);
 * \brief busca la si existe algun recurso dado de alta
 * \param pArray array de estructuras
 * \param len longitud del array
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_isResourceAdded(Resource pArray[], int len); // ok
 
@@ -99,7 +99,7 @@ int resource_isResourceAdded(Resource pArray[], int len); // ok
 * \param pArray array de estructuras
 * \param len longitud del array
 * \param typeId id del tipo, solicitado previamente
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_load(Resource pArray[], int len, int typeId); // ok
 
@@ -110,7 +110,7 @@ int resource_load(Resource pArray[], int len, int typeId); // ok
 * \param description la descripcion validada
 * \param price el precio validado
 * \param typeId id recibido por parametro en load, llega aca y se carga
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_add(Resource pArray[], int len, char description[], float price, int typeId); // ok
 
@@ -120,7 +120,7 @@ int resource_add(Resource pArray[], int len, char description[], float price, in
 * \param len longitud del array
 * \param pos posicion del array a modificar
 * \param option opcion que indica el campo a modificar
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_modify(Resource pArray[], int len, int pos, int option); // ok
 
@@ -129,24 +129,22 @@ int resource_modify(Resource pArray[], int len, int pos, int option); // ok
 * \param pArray array de estructuras
 * \param len longitud del array
 * \param id a dar de baja
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int resource_remove(Resource pArray[], int len, int id); // ok
 
 /**
 * \brief imprime una posicion del array
-* \param pArray array de estructuras
-* \return ret = [0] - error = [1]
+* \param resource una estructura sola
 */
-int resource_printResource(Resource pArray[]); // ok
+void resource_printResource(Resource resource); // ok
 
 /**
 * \brief realiza un loop en el array, llamando por cada vuelta, a la funcion que imprime una posicion
 * \param pArray array de estructuras
 * \param len longitud del array
-* \return ret = [0] - error = [1]
 */
-int resource_printResources(Resource pArray[], int len); // ok
+void resource_printResources(Resource pArray[], int len); // ok
 
 /**
 * \brief ordena el array de forma ascendente, teniendo en cuenta el tipo, luego llama a la funcion ue ordena por descripcion

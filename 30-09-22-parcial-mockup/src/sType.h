@@ -25,7 +25,7 @@ typedef struct
 * \brief inicializa un array asignando valor 0 a "campo" isEmpty de la estructura
 * \param pArray array de estructuras
 * \param len longitud del array
-* \return ret = [0] - error = [1]
+* \return ret = [0] - error = [-1]
 */
 int type_initArray(Type pArray[], int len); // ok
 
@@ -67,18 +67,16 @@ void type_forceLoad(Type pArray[], int len, char description[]); // ok
 
 /**
 * \brief imprime una posicion del array
-* \param pArray array de estructuras
-* \return ret = [0] - error = [1]
+* \param type una estructura sola
 */
-int type_printType(Type pArray[]); // ok
+void type_printType(Type type); // ok
 
 /**
 * \brief realiza un loop en el array, llamando por cada vuelta, a la funcion que imprime una posicion
 * \param pArray array de estructuras
 * \param len longitud del array
-* \return ret = [0] - error = [1]
 */
-int type_printTypes(Type pArray[], int len); // ok
+void type_printTypes(Type pArray[], int len); // ok
 
 
 #endif /* STYPE_H_ */

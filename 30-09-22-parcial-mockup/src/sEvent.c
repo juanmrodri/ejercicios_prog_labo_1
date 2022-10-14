@@ -32,6 +32,7 @@ int event_initArray(Event pArray[], int len)
 		{
 			pArray[i].isEmpty = EMPTY;
 		}
+		ret=0;
 	}
 
 	return ret;
@@ -124,13 +125,42 @@ int event_load(Event pArray[], int len, int ResourceId)
 			{
 				if(utn_getText(auxLocation, 31, "\nPor favor ingrese la localidad del evento: ", "Error al ingresar la localidad\n", 2)==0)
 				{
-					if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
+					if(utn_getInt(&auxYear,"\nPor favor ingrese la fecha del evento(anio) - hasta 2024: ", "Error al ingresar el anio\n", 2022,2024, 2)==0)
 					{
 						if(utn_getInt(&auxMonth,"\nPor favor ingrese la fecha del evento(mes): ", "Error al ingresar el mes\n", 1,12, 2)==0)
 						{
-							if(utn_getInt(&auxYear,"\nPor favor ingrese la fecha del evento(anio) - hasta 2024: ", "Error al ingresar el anio\n", 2022,2024, 2)==0)
+							while(auxYear==2022 && auxMonth<10)
 							{
+								if(utn_getInt(&auxMonth,"\nPor favor ingrese un mes valido: ", "Error al ingresar el mes\n", 1,12, 2)==0)
+								{
+									if(auxMonth<10)
+									{
+										printf("\nIntente nuevamente!\n");
+									}
+									else
+									{
+										printf("\nPerfecto!\n");
+									}
+								}
+							}
+							if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
+							{
+								while(auxYear==2022 && auxMonth==10 && auxDay<13)
+								{
+									if(utn_getInt(&auxDay,"\nPor favor ingrese un dia valido: ", "Error al ingresar el dia\n", 13,31, 2)==0)
+									{
+										if(auxDay<13)
+										{
+											printf("\nIntente nuevamente!\n");
+										}
+										else
+										{
+											printf("\nPerfecto!\n");
+										}
+									}
+								}
 								ret=0;
+								printf("\nEvento cargado correctamente!\n\n");
 								event_add(pArray, len, auxAmount, auxLocation, auxDay, auxMonth, auxYear, ResourceId);
 							}
 							else
@@ -189,34 +219,27 @@ int event_add(Event pArray[], int len, int amount, char location[], int day, int
 	return ret;
 }
 
-int event_printEvent(Event pArray[])
+void event_printEvent(Event event)
 {
-	int ret=-1;
 
-
-	if(pArray!=NULL)
-	{
 		printf("\nid: %d\n-------\n"
 					"Cantidad(horas):%d\n"
 					"Localidad: %s\n"
 					"fecha: %d/%d/%d\n"
-					"Recurso(id): %d\n\n", pArray->idEvent,pArray->amount,pArray->location, pArray->eventDate.day,pArray->eventDate.month,pArray->eventDate.year,pArray->resourceId);
-	}
-	return ret;
+					"Recurso(id): %d\n\n", event.idEvent,event.amount,event.location, event.eventDate.day,event.eventDate.month,event.eventDate.year,event.resourceId);
+
 }
 
-int event_printEvents(Event pArray[], int len)
+void event_printEvents(Event pArray[], int len)
 {
-	int ret=-1;
 	if(pArray!=NULL && len>0)
 		{
 			for(int i=0;i<len;i++)
 			{
 				if(pArray[i].isEmpty==OCCUPIED)
 				{
-					event_printEvent(&pArray[i]);
+					event_printEvent(pArray[i]);
 				}
 			}
 		}
-	return ret;
 }

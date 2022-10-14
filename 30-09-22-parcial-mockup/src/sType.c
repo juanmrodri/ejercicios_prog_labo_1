@@ -119,32 +119,23 @@ void type_getDescriptionById(Type pArray[], int len, int id, char description[])
 }
 */
 
-int type_printType(Type pArray[])
+void type_printType(Type type)
 {
-	int ret=-1;
-		if(pArray!=NULL)
-		{
-			ret=0;
-			printf("\nid: %d\n------------\n"
-						"Descripcion: %s\n\n", pArray->idType, pArray->description);
-		}
-	return ret;
+		printf("\nid: %d\n------------\n"
+					"Descripcion: %s\n\n", type.idType, type.description);
 }
 
-int type_printTypes(Type pArray[], int len)
+void type_printTypes(Type pArray[], int len)
 {
-	int ret=-1;
 		if(pArray!=NULL && len>0)
 		{
 			for(int i=0;i<len;i++)
 			{
 				if(pArray[i].isEmpty==OCCUPIED)
 				{
-					type_printType(&pArray[i]);
+					type_printType(pArray[i]);
 				}
 			}
-			ret=0;
 		}
-	return ret;
 }
 

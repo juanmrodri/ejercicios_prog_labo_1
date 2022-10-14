@@ -1,6 +1,6 @@
-00:29:27 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
+21:38:45 **** Incremental Build of configuration Debug for project 30-09-22-parcial-mockup ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\menu.o" "..\\src\\menu.c" 
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sType.o" "..\\src\\sType.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\30-09-22-parcial-mockup.o" "..\\src\\30-09-22-parcial-mockup.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\sType.o" "..\\src\\sType.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\menu.o" "..\\src\\menu.c" 
 gcc -o 30-09-22-parcial-mockup.exe "src\\30-09-22-parcial-mockup.o" "src\\menu.o" "src\\report.o" "src\\sEvent.o" "src\\sResource.o" "src\\sType.o" "src\\utn_input.o" 

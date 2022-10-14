@@ -45,18 +45,38 @@ int menu_show(int*  response)
 		}
 	}
 	else
-	{
-		if(!(auxResponse>0 && auxResponse<9))
 		{
-			errors = errorCount();
-			//printf("\nError(es): %d\n\n",errors);
-			if(errors==2)
+			if(!(auxResponse>0 && auxResponse<9))
 			{
-				printf("\nPor favor intente ingresando un numero (1 - 8)\n\n");
+				errors = errorCount();
+				//printf("\nError(es): %d\n\n",errors);
+				if(errors%2==0)
+				{
+					printf("\nPor favor intente ingresando un numero (1 - 8)\n\n");
+				}
+				else
+				{
+					if(errors%5==0)
+					{
+						printf("\nSabemos que puede ser engorroso, por favor, tenga en cuenta las opciones (1 - 8)\n\n");
+					}
+					else
+					{
+						if(errors%7==0)
+						{
+							printf("\nSi desea puede precionar 9 para detener la ejecucion, y volver a empezar...\n\n");
+						}
+						else
+						{
+							if(errors%3==0)
+							{
+								printf("\nVamos, animo...Intente con dar de alta un recurso! (1)\n\n");
+							}
+						}
+					}
+				}
 			}
 		}
-
-	}
 
 	return ret;
 }
@@ -119,7 +139,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 								if(auxPos>-1)
 								{
 									printf("\nSe eligio: \n\n");
-									resource_printResource(&arrayResources[auxPos]);
+									resource_printResource(arrayResources[auxPos]);
 									if(utn_getInt(&response, "Que desea modificar\n"
 																				"1- Precio por hora\n"
 																				"2- Descripcion\n -> ", "\nError al ingresar opcion!\n\n", 1, 2, 2)==0)
@@ -269,7 +289,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 												auxTypeId = type_findIdByPos(arrayTypes, lenType, auxTypeId);
 
 												printf("\n\tSe selecciono el siguiente tipo\n");
-												type_printType(&arrayTypes[type_findPosById(arrayTypes, lenType, auxTypeId)]);
+												type_printType(arrayTypes[type_findPosById(arrayTypes, lenType, auxTypeId)]);
 												printf("\n----------------------------------------------\n");
 
 												// chequeamos que exista cargado el tipo ingresado, por lo menos 1
@@ -295,6 +315,9 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 										{
 											if(event_isEventAdded(arrayEvents, lenEvents)==0)
 											{
+												printf("\n\tLista de Eventos\n");
+												printf("\n----------------------------------------------\n");
+												event_printEvents(arrayEvents, lenEvents);
 												printf("\n\tIngrese la fecha que quere consultar:\n");
 												if(utn_getInt(&auxDay,"\nPor favor ingrese la fecha del evento(dia): ", "Error al ingresar el dia\n", 1,31, 2)==0)
 												{
@@ -351,7 +374,7 @@ int menu_resolve(int response, Resource arrayResources[], int lenResource, Type 
 												if(utn_getInt(&auxId, "Ingrese el Id del recurso para calcular  el importe: ",  "\nError al ingresar opcion!\n\n", 1, lenResource, 2)==0)
 												{
 													printf("\n\tSe selecciono el siguiente recurso\n");
-													resource_printResource(&arrayResources[resource_findById(arrayResources, lenResource,auxId)]);
+													resource_printResource(arrayResources[resource_findById(arrayResources, lenResource,auxId)]);
 													printf("\n----------------------------------------------\n");
 													// esto significa que el id existe, pero en el array recursos
 													if(resource_findById(arrayResources, lenResource,auxId)>-1)
