@@ -6,6 +6,7 @@
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="calculations_averagePlayer"/>
 			<item value="resource_printResources"/>
 			<item value="type_printTypes"/>
 			<item value="event_printEvents"/>
@@ -13,7 +14,6 @@
 			<item value="TypeId"/>
 			<item value="resource_initArray"/>
 			<item value="utn_getText"/>
-			<item value="descripcion"/>
 		</list>
 		<list key="replacehistory">
 		</list>
