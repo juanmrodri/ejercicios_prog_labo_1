@@ -100,13 +100,15 @@ void report_playersPerConfederation(sConfederation arrayConfederations[], int le
 				if(arrayConfederations[i].isEmpty==OCCUPIED)
 				{
 					auxConfederationId = arrayConfederations[i].id;
-					report_countPlayerConfederationAmount(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations, auxConfederationId, &auxConfederationAmount);
-					if(auxConfederationAmount>0)
+					if(report_countPlayerConfederationAmount(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations, auxConfederationId, &auxConfederationAmount)==0)
 					{
-						printf("=======================================\n");
-						printf("|  CONFEDERACION        |  %-10s |\n",arrayConfederations[i].name);
-						printf("---------------------------------------\n");
-						report_printPlayersFilteredByIdConfederation(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations,auxConfederationId);
+						if(auxConfederationAmount>0)
+							{
+								printf("=======================================\n");
+								printf("|  CONFEDERACION        |  %-10s |\n",arrayConfederations[i].name);
+								printf("---------------------------------------\n");
+								report_printPlayersFilteredByIdConfederation(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations,auxConfederationId);
+							}
 					}
 				}
 			}
@@ -139,8 +141,9 @@ void report_printPlayersFilteredByIdConfederation(sPlayer arrayPlayers[], int le
 	}
 }
 
-void report_countPlayerConfederationAmount(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations, int idConfederation, int* confederationAmount)
+int report_countPlayerConfederationAmount(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations, int idConfederation, int* confederationAmount)
 {
+	int ret=-1;
 	int auxConfederationAmount=0;
 	if(arrayPlayers!=NULL && lenPlayers>0)
 	{
@@ -153,9 +156,11 @@ void report_countPlayerConfederationAmount(sPlayer arrayPlayers[], int lenPlayer
 					auxConfederationAmount++;
 				}
 			}
+			ret=0;
 			*confederationAmount=auxConfederationAmount;
 		}
 	}
+	return ret;
 }
 
 // informe 3
@@ -298,7 +303,7 @@ int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfe
 							auxAmountYearsActualRound=auxAmountYears;
 						}
 			}
-			printf("\nanios sumados una vez terminada la vuelta %d\n",auxAmountYearsActualRound);
+			//printf("\nanios sumados una vez terminada la vuelta %d\n",auxAmountYearsActualRound);
 			arrayAuxAmountYearsActualRound[i]=auxAmountYearsActualRound;
 
 			if(flagFirstAmount==0)
@@ -335,8 +340,8 @@ int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfe
 			{
 				auxEqualMaxAmount++;
 			}
-			printf("\nEqual amount %d\n", auxEqualMaxAmount);
-			printf("\nPos %d = %d\n", i, arrayAuxAmountYearsActualRound[i]);
+			//printf("\nEqual amount %d\n", auxEqualMaxAmount);
+			//printf("\nPos %d = %d\n", i, arrayAuxAmountYearsActualRound[i]);
 
 		}
 
@@ -350,7 +355,7 @@ int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfe
 		else
 		{
 			ret=0;
-			printf("\nPor el momento no existe una confederacion con mas anios de contrataciones\n");
+			printf("\nPor el momento no existe una unica confederacion con mas anios de contrataciones\n");
 		}
 
 	}
@@ -377,3 +382,165 @@ int report_confederationHasYears(sPlayer arrayPlayers[], int lenPlayers, int con
 	return ret;
 
 }
+
+// informe 5
+
+int report_playersPercentagePerConfederationCalculations(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations)
+{
+	int ret=-1;
+	int auxIdConfederation;
+	int auxConfederationAmount;
+	float auxPercentage;
+	char auxConfederationName[50];
+
+	if(arrayPlayers!=NULL && lenPlayers>0 && arrayConfederations!=NULL && lenConfederations>0)
+	{
+		for(int i=0;i<lenConfederations;i++)
+		{
+			if(arrayConfederations[i].isEmpty==OCCUPIED)
+			{
+				auxIdConfederation=arrayConfederations[i].id;
+				if(report_countPlayerConfederationAmount(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations, auxIdConfederation, &auxConfederationAmount)==0)
+				{
+					ret=0;
+
+					auxPercentage = report_playersPercentagePerConfederation(arrayPlayers, lenPlayers, auxConfederationAmount);
+
+					prints_findConfederationNameById(arrayConfederations, lenConfederations, auxIdConfederation, auxConfederationName);
+
+					report_printPlayersPercentagePerConfederationCalculations(auxConfederationName, auxPercentage);
+				}
+			}
+		}
+
+	}
+
+	return ret;
+}
+
+float report_playersPercentagePerConfederation(sPlayer arrayPlayers[], int lenPlayers, int auxConfederationAmount)
+{
+	int auxPlayersTotalAmount=0;
+	float auxPercentage=0;
+
+	if(arrayPlayers!=NULL && lenPlayers>0 && auxConfederationAmount>0)
+	{
+		auxPlayersTotalAmount = report_playersCount(arrayPlayers, lenPlayers);
+		auxPercentage =(float)auxPlayersTotalAmount* auxConfederationAmount/100;
+	}
+	return auxPercentage;
+}
+
+void report_printPlayersPercentagePerConfederationCalculations(char auxConfederationName[], float auxPercentage)
+{
+		if(auxPercentage>0)
+			{
+				printf("\n================================\n");
+
+				printf("|  %-8s   |  %-10.2f    |\n",auxConfederationName, auxPercentage);
+
+				printf("--------------------------------\n");
+			}
+}
+
+// informe 6
+
+int report_RegionMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations)
+{
+	int ret=-1;
+	int auxIdConfederation;
+	int auxConfederationAmount;
+	char auxConfederationName[50];
+	int auxConfederationAmountActualRound=0;
+	int flagFirstAmount=0;
+	int minAmount=0;
+	int maxAmount=0;
+	int arrayAuxConfederationAmountActualRound[lenConfederations];
+	int auxEqualMaxAmount=0;
+	char auxConfederationRegion[50];
+
+	if(arrayPlayers!=NULL && lenPlayers>0 && arrayConfederations!=NULL && lenConfederations>0)
+	{
+		for(int i=0;i<lenConfederations;i++)
+		{
+			if(arrayConfederations[i].isEmpty==OCCUPIED)
+			{
+				auxIdConfederation=arrayConfederations[i].id;
+				if(report_countPlayerConfederationAmount(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations, auxIdConfederation, &auxConfederationAmount)==0)
+				{
+
+						if(auxConfederationAmount>0)
+						{
+							prints_findConfederationNameById(arrayConfederations, lenConfederations, auxIdConfederation, auxConfederationName);
+						}
+						auxConfederationAmountActualRound=auxConfederationAmount;
+				}
+
+				arrayAuxConfederationAmountActualRound[i]=auxConfederationAmountActualRound;
+
+				if(flagFirstAmount==0)
+				{
+					minAmount=auxConfederationAmountActualRound;
+					maxAmount=auxConfederationAmountActualRound;
+				}
+				else
+				{
+					if(auxConfederationAmountActualRound<minAmount)
+					{
+						minAmount=auxConfederationAmountActualRound;
+					}
+					else
+					{
+						if(auxConfederationAmountActualRound>maxAmount)
+						{
+							maxAmount=auxConfederationAmountActualRound;
+							auxIdConfederation=arrayConfederations[i].id;
+						}
+					}
+				}
+			}
+		}
+		for(int i=0;i<lenConfederations;i++)
+		{
+			if(arrayAuxConfederationAmountActualRound[i]==maxAmount)
+			{
+				auxEqualMaxAmount++;
+			}
+		}
+
+		// buscamos la region por id
+		report_findConfederationRegionById(arrayConfederations, lenConfederations, auxIdConfederation, auxConfederationRegion);
+
+		if(auxEqualMaxAmount==1)
+		{
+			ret=0;
+			printf("\n============================================================\n");
+			printf("|  LA REGION CON MAS JUGADORES ES  |  %8s    |  %3d   |\n",auxConfederationRegion,maxAmount);
+			printf("------------------------------------------------------------\n");
+			report_printPlayersFilteredByIdConfederation(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations, auxIdConfederation);
+		}
+		else
+		{
+			ret=0;
+			printf("\nPor el momento no existe una unica region con mas jugadores\n");
+		}
+	}
+
+	return ret;
+}
+
+void report_findConfederationRegionById(sConfederation arrayConfederations[], int lenConfederations, int auxId, char auxName[])
+{
+	char auxConfederationRegion[50];
+	if(arrayConfederations!=NULL && lenConfederations>0 && auxId>99)
+	{
+		for(int i=0;i<lenConfederations;i++)
+		{
+			if(arrayConfederations[i].id==auxId && arrayConfederations[i].isEmpty==OCCUPIED)
+			{
+				strncpy(auxName,arrayConfederations[i].region,sizeof(auxConfederationRegion));
+			}
+		}
+	}
+}
+

@@ -163,7 +163,7 @@ int sPlayer_load(sPlayer pArray[], int len, int confederationId)
 	if(pArray!=NULL && len>0)
 	{
 		indexFree=sPlayer_findEmptyArrayPosition(pArray, len);
-		if(indexFree>-1 && pArray[indexFree].isEmpty==EMPTY && confederationId>9999)
+		if(indexFree>-1 && pArray[indexFree].isEmpty==EMPTY && confederationId>99)
 		{
 			if(utn_getText(auxName, 50,"\nPor favor ingrese el nombre del jugador: ", "Error al ingresar el nombre\n", 2)==0)
 			{
@@ -222,7 +222,7 @@ int sPlayer_add(sPlayer pArray[], int len, char name[], char position[], short  
 {
 	int ret=-1;
 	int indexFree;
-	if(pArray!=NULL && len>0 && name!=NULL && position!=NULL && shirtNumber>0 && salary>49000 && salary<50000001 && contractYears>0 && contractYears<6 && confederationId>9999)
+	if(pArray!=NULL && len>0 && name!=NULL && position!=NULL && shirtNumber>0 && salary>49000 && salary<50000001 && contractYears>0 && contractYears<6 && confederationId>99)
 	{
 		ret=0;
 		indexFree=sPlayer_findEmptyArrayPosition(pArray, len);

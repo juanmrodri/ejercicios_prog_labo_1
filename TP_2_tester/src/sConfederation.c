@@ -18,7 +18,7 @@ static int newIdGenerator(void);
 
 static int newIdGenerator(void)
 {
-	static int cont=10000;
+	static int cont=100;
 	return cont++;
 }
 

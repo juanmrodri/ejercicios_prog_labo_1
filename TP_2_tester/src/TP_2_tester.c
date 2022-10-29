@@ -16,7 +16,7 @@
 #include "sConfederation.h"
 #include "prints.h"
 
-#define PLAYERS_LEN 20
+#define PLAYERS_LEN 3000
 #define CONFEDERATIONS_LEN 6
 
 int main(void) {
@@ -41,28 +41,26 @@ int main(void) {
 	sConfederation_forceLoad(arrayConfederations, CONFEDERATIONS_LEN, "UEFA", "EUROPA", 1954);
 
 	// alta forzada de jugadores (BORRAR!)
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Benzema", "Delantero", 9,350000000, 2, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Messi", "Delantero", 10, 2700000, 2, 10005);
-	/*
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Lewandowski", "Delantero", 9, 4500000, 4, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Bukayo Saka", "Mediocampista", 7, 35000000, 1, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Valverde", "Mediocampista",7, 25000000, 4, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Cavani", "Delantero", 7, 45000000, 3, 10003);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Bellingham", "Mediocampista", 22, 35000000, 3, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Brahim", "Mediocampista", 10, 350000000, 4, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Haaland", "Delantero", 9, 35000000, 3, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Casemiro", "Mediocampista",18, 35000000, 5, 10005);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Carlos Sanchez", "Defensor", 31, 35000000, 1, 10002);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Pedro Baez", "Delantero", 17, 2700000, 2, 10002);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Teanonui tehau", "Delantero", 10, 4500000, 2, 10004);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Clemente Rodriguez", "Defensor", 14, 3500000, 4, 10004);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Gonzalo Morales", "Delantero",28, 35000000, 3, 10004);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Famara Diedhieou", "Delantero", 14, 2700000, 2, 10001);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Sadio Mane", "Delantero", 17, 4500000, 4, 10001);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Mohanad Lasheen", "Mediocampista", 14, 3500000, 3, 10001);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Zizo", "Delantero",25, 3500000, 4, 10001);
-	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Mohamed Abougabal", "Arquero",1, 3500000, 5, 10001);
-	*/
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Benzema", "Delantero", 9,350000000, 2, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Messi", "Delantero", 10, 2700000, 2, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Lewandowski", "Delantero", 9, 4500000, 4, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Bukayo Saka", "Mediocampista", 7, 35000000, 1, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Valverde", "Mediocampista",7, 25000000, 4, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Cavani", "Delantero", 7, 45000000, 3, 103);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Bellingham", "Mediocampista", 22, 35000000, 3, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Brahim", "Mediocampista", 10, 350000000, 4, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Haaland", "Delantero", 9, 35000000, 3, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Casemiro", "Mediocampista",18, 35000000, 5, 105);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Carlos Sanchez", "Defensor", 31, 35000000, 1, 102);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Pedro Baez", "Delantero", 17, 2700000, 2, 102);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Teanonui tehau", "Delantero", 10, 4500000, 2, 104);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Clemente Rodriguez", "Defensor", 14, 3500000, 4, 104);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Gonzalo Morales", "Delantero",28, 35000000, 3, 104);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Famara Diedhieou", "Delantero", 14, 2700000, 2, 101);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Sadio Mane", "Delantero", 17, 4500000, 4, 101);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Mohanad Lasheen", "Mediocampista", 14, 3500000, 3, 101);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Zizo", "Delantero",25, 3500000, 4, 101);
+	sPlayer_forceLoad(arrayPlayers, PLAYERS_LEN, "Mohamed Abougabal", "Arquero",1, 3500000, 5, 101);
 	//menu
 
 		do

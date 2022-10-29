@@ -23,7 +23,7 @@ void report_playersPerConfederation(sConfederation arrayConfederations[], int le
 
 void report_printPlayersFilteredByIdConfederation(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations, int idConfederation);
 
-void report_countPlayerConfederationAmount(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations, int idConfederation, int* confederationAmount);
+int report_countPlayerConfederationAmount(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations, int idConfederation, int* confederationAmount);
 
 // informe 3
 int report_playersAverageSalaryCalculation(sPlayer arrayPlayers[], int lenPlayers);
@@ -44,5 +44,19 @@ void report_printPlayersAverageSalaryCalculation(float totalSalary, float averag
 int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations);
 
 int report_confederationHasYears(sPlayer arrayPlayers[], int lenPlayers, int confederationId);
+
+// informe 5
+
+int report_playersPercentagePerConfederationCalculations(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations);
+
+float report_playersPercentagePerConfederation(sPlayer arrayPlayers[], int lenPlayers, int auxConfederationAmount);
+
+void report_printPlayersPercentagePerConfederationCalculations(char auxConfederationName[], float auxPercentage);
+
+// informe 6
+
+int report_RegionMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations);
+
+void report_findConfederationRegionById(sConfederation arrayConfederations[], int lenConfederations, int auxId, char auxName[]);
 
 #endif /* REPORT_H_ */

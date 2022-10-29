@@ -1,4 +1,4 @@
-20:45:08 **** Incremental Build of configuration Debug for project TP_2_tester ****
+16:37:14 **** Incremental Build of configuration Debug for project TP_2_tester ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\report.o" "..\\src\\report.c" 
 gcc -o TP_2_tester.exe "src\\TP_2_tester.o" "src\\menu.o" "src\\prints.o" "src\\report.o" "src\\sConfederation.o" "src\\sPlayer.o" "src\\utn_input.o" 

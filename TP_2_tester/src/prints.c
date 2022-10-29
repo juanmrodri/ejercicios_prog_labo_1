@@ -15,7 +15,7 @@
 void prints_findConfederationNameById(sConfederation arrayConfederations[], int lenConfederations, int auxId, char auxName[])
 {
 	char auxConfederationName[50];
-	if(arrayConfederations!=NULL && lenConfederations>0 && auxId>9999)
+	if(arrayConfederations!=NULL && lenConfederations>0 && auxId>99)
 	{
 		for(int i=0;i<lenConfederations;i++)
 		{

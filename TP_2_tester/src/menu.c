@@ -234,7 +234,7 @@ int menu_playerLoad(sPlayer arrayPlayers[], int lenPlayers, sConfederation array
 	if(arrayPlayers!=NULL && lenPlayers>0)
 	{
 			sConfederation_printConfederations(arrayConfederations, lenConfederations);
-			if(utn_getInt(&auxConfederationId, "Por favor ingrese el id de la confederacion a la que pertenece el jugador: ", "Error al ingresar la confederacion\n", 10000, 10009, 2)==0) // solo hay 6 hardcodeadas pero hay espacio para agregar 4 mas si se quiere
+			if(utn_getInt(&auxConfederationId, "Por favor ingrese el id de la confederacion a la que pertenece el jugador: ", "Error al ingresar la confederacion\n", 100, 109, 2)==0) // solo hay 6 hardcodeadas pero hay espacio para agregar 4 mas si se quiere
 			{
 
 				if(sConfederation_findConfederationById(arrayConfederations, lenConfederations, auxConfederationId)>-1)
@@ -271,7 +271,7 @@ int menu_playerRemove(sPlayer arrayPlayers[], int lenPlayers, sConfederation arr
 	{
 			// aca mostramos los jugadores para que se elija el id (ordenados por id)
 			prints_printPlayersWithConfederations(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations);
-			if(utn_getInt(&auxIdPlayer, "\nPor favor ingrese el id del jugador que quiere dar de baja: ", "Error al ingresar el id\n", 1, lenPlayers, 2)==0)
+			if(utn_getInt(&auxIdPlayer, "\nPor favor ingrese el id del jugador que quiere dar de baja: ", "Error al ingresar el id\n", 1, 9999, 2)==0)
 			{
 				if(sPlayer_findPlayerById(arrayPlayers, lenPlayers, auxIdPlayer)>-1)
 				{
@@ -422,6 +422,10 @@ int menu_reportShow(sPlayer arrayPlayers[], int lenPlayers, sConfederation array
 					{
 						ret=0;
 					}
+					else
+					{
+						printf("\nNo fue posible realizar el informe!\n\n");
+					}
 					break;
 				case 3:
 					//report_playersCount(arrayPlayers, lenPlayers);
@@ -429,12 +433,33 @@ int menu_reportShow(sPlayer arrayPlayers[], int lenPlayers, sConfederation array
 					{
 						ret=0;
 					}
+					else
+					{
+						printf("\nNo fue posible realizar el informe!\n\n");
+					}
 					break;
 				case 4:
 					if(report_confederationMostYears(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations)==0)
 					{
 						ret=0;
 					}
+					else
+					{
+						printf("\nNo fue posible realizar el informe!\n\n");
+					}
+					break;
+				case 5:
+					if(report_playersPercentagePerConfederationCalculations(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations)==0)
+					{
+						ret=0;
+					}
+					else
+					{
+						printf("\nNo fue posible realizar el informe!\n\n");
+					}
+					break;
+				case 6:
+					report_RegionMostYears(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations);
 					break;
 				}
 			}
