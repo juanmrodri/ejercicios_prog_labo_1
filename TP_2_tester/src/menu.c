@@ -431,7 +431,10 @@ int menu_reportShow(sPlayer arrayPlayers[], int lenPlayers, sConfederation array
 					}
 					break;
 				case 4:
-
+					if(report_confederationMostYears(arrayPlayers, lenPlayers, arrayConfederations, lenConfederations)==0)
+					{
+						ret=0;
+					}
 					break;
 				}
 			}

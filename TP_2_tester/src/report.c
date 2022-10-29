@@ -246,7 +246,7 @@ int report_amountPlayersSalaryMoreThanAverage(sPlayer arrayPlayers[], int lenPla
 	{
 		for(int i=0;i<lenPlayers;i++)
 		{
-			if(arrayPlayers[i].salary>averageSalary)
+			if(arrayPlayers[i].salary>averageSalary && arrayPlayers[i].isEmpty==OCCUPIED)
 			{
 				playersCount++;
 			}
@@ -258,12 +258,122 @@ int report_amountPlayersSalaryMoreThanAverage(sPlayer arrayPlayers[], int lenPla
 
 void report_printPlayersAverageSalaryCalculation(float totalSalary, float averageSalary, int playersOverAverageCount)
 {
-		printf("============================================================================\n");
+		printf("\n============================================================================\n");
 		printf("|  TOTAL DE SUELDOS   			          |  %20.2f  |\n",totalSalary);
 		printf("|  SUELDO PROMEDIO   			          |  %20.2f  |\n",averageSalary);
-		printf("|  CANTIDAD DE JUGADORES QUE SUPERAN EL PROMEDIO  |%22i  |\n",playersOverAverageCount);
+		if(playersOverAverageCount>0)
+		{
+			printf("|  CANTIDAD DE JUGADORES QUE SUPERAN EL PROMEDIO  |%22i  |\n",playersOverAverageCount);
+		}
 		printf("----------------------------------------------------------------------------\n");
 }
 
 // informe 4
 
+int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations)
+{
+	int ret=-1;
+	int auxConfederationId;
+	int auxAmountYears=0;
+	int auxAmountYearsActualRound=0;
+	int flagFirstAmount=0;
+	int minAmountYears=0;
+	int maxAmountYears=0;
+	char auxMostYearsContractConfederationName[50];
+	int arrayAuxAmountYearsActualRound[lenConfederations];
+	int auxEqualMaxAmount=0;
+
+	if(arrayPlayers!=NULL && lenPlayers>0 && arrayConfederations!=NULL && lenConfederations>0)
+	{
+		for(int i=0;i<lenConfederations;i++)
+		{
+			//printf("\n%s\n",arrayConfederations[i].name);
+			for(int j=0;j<lenPlayers;j++)
+			{
+				auxConfederationId = arrayConfederations[i].id;
+					if(arrayPlayers[j].confederationId==arrayConfederations[i].id && arrayPlayers[j].isEmpty==OCCUPIED && (report_confederationHasYears(arrayPlayers, lenPlayers, auxConfederationId)==0))
+						{
+							auxAmountYears=auxAmountYears+arrayPlayers[j].contractYears;
+							//printf("\n%hd - anios sumados %d\n",arrayPlayers[j].contractYears, auxAmountYears);
+							auxAmountYearsActualRound=auxAmountYears;
+						}
+			}
+			printf("\nanios sumados una vez terminada la vuelta %d\n",auxAmountYearsActualRound);
+			arrayAuxAmountYearsActualRound[i]=auxAmountYearsActualRound;
+
+			if(flagFirstAmount==0)
+			{
+				flagFirstAmount=1;
+				minAmountYears=auxAmountYearsActualRound;
+				maxAmountYears=auxAmountYearsActualRound;
+				//printf("\nminimo %d\nmaximo %d\n",minAmountYears,maxAmountYears);
+			}
+			else
+			{
+				if(auxAmountYearsActualRound<minAmountYears)
+				{
+					minAmountYears=auxAmountYearsActualRound;
+				}
+				else
+				{
+					if(auxAmountYearsActualRound>maxAmountYears)
+					{
+						maxAmountYears=auxAmountYearsActualRound;
+						strncpy(auxMostYearsContractConfederationName,arrayConfederations[i].name,sizeof(auxMostYearsContractConfederationName));
+						//printf("\nLa confederacion con mas anios de contratacion es: %s\n",auxMostYearsContractConfederationName);
+
+					}
+				}
+			}
+			auxAmountYears=0;
+		}
+		//printf("\nLa confederacion con mas anios de contratacion es: %s: %d\n",auxMostYearsContractConfederationName, maxAmountYears);
+
+		for(int i=0;i<lenConfederations;i++)
+		{
+			if(arrayAuxAmountYearsActualRound[i]==maxAmountYears)
+			{
+				auxEqualMaxAmount++;
+			}
+			printf("\nEqual amount %d\n", auxEqualMaxAmount);
+			printf("\nPos %d = %d\n", i, arrayAuxAmountYearsActualRound[i]);
+
+		}
+
+		if(auxEqualMaxAmount==1)
+		{
+			ret=0;
+			printf("\n==========================================================================================\n");
+			printf("|  CONFEDERACION CON MAYOR CANTIDAD DE ANIOS DE CONTRATOS TOTAL |  %6s    |  %6d   |\n",auxMostYearsContractConfederationName,maxAmountYears);
+			printf("------------------------------------------------------------------------------------------\n");
+		}
+		else
+		{
+			ret=0;
+			printf("\nPor el momento no existe una confederacion con mas anios de contrataciones\n");
+		}
+
+	}
+
+	return ret;
+}
+
+int report_confederationHasYears(sPlayer arrayPlayers[], int lenPlayers, int confederationId)
+{
+	int ret=-1;
+	if(arrayPlayers!=NULL && lenPlayers>0)
+	{
+		for(int i=0;i<lenPlayers;i++)
+		{
+			if(arrayPlayers[i].confederationId==confederationId)
+			{
+				// el id coincide, fue seleccionado, y por ende, tiene anios
+				ret=0;
+				break;
+			}
+		}
+	}
+
+	return ret;
+
+}

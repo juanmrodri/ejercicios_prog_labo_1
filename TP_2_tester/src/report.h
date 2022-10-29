@@ -41,4 +41,8 @@ void report_printPlayersAverageSalaryCalculation(float totalSalary, float averag
 
 // informe 4
 
+int report_confederationMostYears(sPlayer arrayPlayers[], int lenPlayers, sConfederation arrayConfederations[], int lenConfederations);
+
+int report_confederationHasYears(sPlayer arrayPlayers[], int lenPlayers, int confederationId);
+
 #endif /* REPORT_H_ */
